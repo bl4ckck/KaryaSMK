@@ -1,4 +1,4 @@
-package com.example.rekat
+package com.devid.rekat
 
 import io.flutter.embedding.android.FlutterActivity
 
