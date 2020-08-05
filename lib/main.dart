@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:neumorphic/neumorphic.dart';
-import 'package:rekat/screens/homescreen.dart';
+import 'package:karyasmk/screens/homescreen.dart';
 import 'package:flutter/services.dart';
 
 void main() {

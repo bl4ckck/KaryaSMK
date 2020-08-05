@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:neumorphic/neumorphic.dart';
-import 'package:rekat/models/MenuModel.dart';
-import 'package:rekat/widgets/HexColor.dart';
+import 'package:karyasmk/models/MenuModel.dart';
+import 'package:karyasmk/widgets/HexColor.dart';
 
 class HomeScreen extends StatelessWidget {
   final menuItems = [
-    MenuModel("menu 1", "img1"),
-    MenuModel("menu 2", "img1"),
-    MenuModel("menu 3", "img1"),
-    MenuModel("menu 1", "img1"),
-    MenuModel("menu 2", "img1"),
-    MenuModel("menu 3", "img1"),
+    MenuModel("Software", "img1"),
+    MenuModel("Electronic", "img1"),
+    MenuModel("Handycraft", "img1"),
+    MenuModel("Multimedia", "img1"),
+    MenuModel("Otomotive", "img1"),
+    MenuModel("Others", "img1"),
   ];
 
   Widget header(BuildContext ctx) {
@@ -37,8 +37,8 @@ class HomeScreen extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    'Rekat',
-                    style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold),
+                    'Karya SMK',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -78,9 +78,12 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[
               Image.asset(
                 'assets/images/box.png',
-                height: 50,
+                height: 40,
               ),
-              Text(title),
+              Text(
+                title,
+                style: TextStyle(fontSize: 12),
+              ),
             ],
           ),
         ),
@@ -93,7 +96,7 @@ class HomeScreen extends StatelessWidget {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 3,
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(19.0),
       crossAxisSpacing: 15.0, //samping
       mainAxisSpacing: 25.0, //atas
       children: menuItems.map((data) => itemGrid(data.title)).toList(),
