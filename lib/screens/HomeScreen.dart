@@ -6,12 +6,11 @@ import 'package:karyasmk/widgets/HexColor.dart';
 
 class HomeScreen extends StatelessWidget {
   final menuItems = [
-    MenuModel("Software", "img1"),
-    MenuModel("Electronic", "img1"),
-    MenuModel("Handycraft", "img1"),
-    MenuModel("Multimedia", "img1"),
-    MenuModel("Otomotive", "img1"),
-    MenuModel("Others", "img1"),
+    MenuModel("Software", "assets/images/wireframe.png"),
+    MenuModel("Electronic", "assets/images/circuit.png"),
+    MenuModel("Handycraft", "assets/images/crayon.png"),
+    MenuModel("Multimedia", "assets/images/multimedia.png"),
+    MenuModel("Others", "assets/images/box.png"),
   ];
 
   Widget header(BuildContext ctx) {
@@ -63,7 +62,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget itemGrid(String title) {
+  Widget itemGrid(String title, String imagePath) {
     return NeuCard(
       curveType: CurveType.convex,
       bevel: 12,
@@ -77,8 +76,11 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Image.asset(
-                'assets/images/box.png',
+                imagePath,
                 height: 40,
+              ),
+              SizedBox(
+                height: 5,
               ),
               Text(
                 title,
@@ -99,7 +101,8 @@ class HomeScreen extends StatelessWidget {
       padding: EdgeInsets.all(19.0),
       crossAxisSpacing: 15.0, //samping
       mainAxisSpacing: 25.0, //atas
-      children: menuItems.map((data) => itemGrid(data.title)).toList(),
+      children:
+          menuItems.map((data) => itemGrid(data.title, data.image)).toList(),
     );
   }
 
@@ -121,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                itemGrid('title'),
+                itemGrid('title', 'assets/images/box.png'),
                 SizedBox(
                   height: 30,
                 ),
