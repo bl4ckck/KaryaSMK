@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:neumorphic/neumorphic.dart';
+import 'package:karyasmk/models/ProductModel.dart';
+import 'package:karyasmk/widgets/CardItem.dart';
 import 'package:karyasmk/models/MenuModel.dart';
-import 'package:karyasmk/widgets/HexColor.dart';
+import 'package:neumorphic/neumorphic.dart';
 
 class HomeScreen extends StatelessWidget {
   final menuItems = [
@@ -11,6 +12,17 @@ class HomeScreen extends StatelessWidget {
     MenuModel("Handycraft", "assets/images/crayon.png"),
     MenuModel("Multimedia", "assets/images/multimedia.png"),
     MenuModel("Others", "assets/images/box.png"),
+  ];
+
+  final productItems = [
+    ProductModel.listCard(
+        "182t1g9f8hqw", "Kardus Pizza\n", "assets/images/kardus.jpeg", 1000),
+    ProductModel.listCard("182t1g9f8hqw", "Lampu Flip Flop awe awe awe",
+        "assets/images/flip.jpg", 1000),
+    ProductModel.listCard(
+        "182t1g9f8hqw", "Sepeda Listrik", "assets/images/sepeda.jpg", 1000),
+    ProductModel.listCard(
+        "182t1g9f8hqw", "Lampu Flip Flop", "assets/images/circuit.png", 1000),
   ];
 
   Widget header(BuildContext ctx) {
@@ -37,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Text(
                     'Karya SMK',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -64,7 +76,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget itemGrid(String title, String imagePath) {
     return NeuCard(
-      curveType: CurveType.convex,
+      curveType: CurveType.emboss,
       bevel: 12,
       decoration: NeumorphicDecoration(borderRadius: BorderRadius.circular(8)),
       child: Wrap(children: <Widget>[
@@ -84,7 +96,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Text(
                 title,
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12, fontFamily: 'Roboto'),
               ),
             ],
           ),
@@ -106,29 +118,69 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  Widget productGrid(double itemWidth, double itemHeight) {
+    return GridView.count(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      crossAxisSpacing: 0.0, //samping
+      mainAxisSpacing: 10.0, //atas
+      childAspectRatio: (itemWidth / itemHeight),
+      controller: new ScrollController(keepScrollOffset: false),
+      scrollDirection: Axis.vertical,
+      children: productItems
+          .map((data) => CardItem(
+                idProduct: data.idProduct,
+                title: data.title,
+                image: data.image,
+                price: data.price,
+              ))
+          .toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
+    final double itemHeight = ((size.height - kToolbarHeight - 24) / 2) + 50;
+    final double itemWidth = size.width / 2;
+
     return Scaffold(
       backgroundColor: NeuTheme.of(context).backgroundColor,
       body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                header(context),
-                SizedBox(
-                  height: 30,
-                ),
-                menuGrid(),
-                SizedBox(
-                  height: 30,
-                ),
-                itemGrid('title', 'assets/images/box.png'),
-                SizedBox(
-                  height: 30,
-                ),
-              ]),
+        child: DefaultTextStyle(
+          style: TextStyle(fontFamily: 'Montserrat', color: Colors.black),
+          child: Container(
+            margin: EdgeInsets.only(left: 16, right: 16),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  header(context),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  menuGrid(),
+                  Divider(
+                    height: 25,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      print('Pressed !');
+                    },
+                    child: SizedBox(
+                      height: 120,
+                      child: Image.asset(
+                        'assets/images/poster1.png',
+                      ),
+                    ),
+                  ),
+                  productGrid(itemWidth, itemHeight),
+                  SizedBox(
+                    height: 30,
+                  ),
+                ]),
+          ),
         ),
       ),
     );
