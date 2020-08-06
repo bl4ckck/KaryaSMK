@@ -31,6 +31,12 @@ dependencies:
   neumorphic: ^0.3.2
   auto_size_text: ^2.1.0
   intl: ^0.16.1
+  equatable: ^1.2.3
+  http: ^0.12.2
+  rxdart: ^0.24.1
+  bloc: ^5.0.1
+  flutter_bloc: ^5.0.1
+  path_provider: ^1.6.11
 
 dev_dependencies:
   flutter_test:

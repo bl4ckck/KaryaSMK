@@ -7,7 +7,7 @@ class CardItem extends StatelessWidget {
   final String idProduct;
   final String title;
   final String image;
-  final int price;
+  final String price;
 
   const CardItem(
       {Key key,
@@ -19,7 +19,9 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var fPrice = NumberFormat.currency(name: 'Rp').format(price);
+    int priceInt = int.parse(price);
+
+    var fPrice = NumberFormat.currency(name: 'Rp').format(priceInt);
 
     return NeuCard(
       curveType: CurveType.concave,
@@ -34,7 +36,7 @@ class CardItem extends StatelessWidget {
         },
         child: Column(
           children: <Widget>[
-            Image.asset(
+            Image.network(
               image,
               // width: double.infinity,
               fit: BoxFit.cover,

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:karyasmk/bloc/bloc.dart';
 import 'package:karyasmk/models/ProductModel.dart';
-import 'package:karyasmk/widgets/CardItem.dart';
+import 'package:karyasmk/screens/home_screen/TerbaruList.dart';
 import 'package:karyasmk/models/MenuModel.dart';
 import 'package:neumorphic/neumorphic.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final menuItems = [
     MenuModel("Software", "assets/images/wireframe.png"),
     MenuModel("Electronic", "assets/images/circuit.png"),
@@ -105,38 +112,32 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget menuGrid() {
-    return GridView.count(
+  Widget menuGrid(BuildContext ctx) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 25.0,
+        crossAxisSpacing: 15.0,
+      ),
+      padding: EdgeInsets.all(19.0),
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      crossAxisCount: 3,
-      padding: EdgeInsets.all(19.0),
-      crossAxisSpacing: 15.0, //samping
-      mainAxisSpacing: 25.0, //atas
-      children:
-          menuItems.map((data) => itemGrid(data.title, data.image)).toList(),
+      itemCount: menuItems.length,
+      itemBuilder: (ctx, index) {
+        return itemGrid(
+          menuItems[index].title,
+          menuItems[index].image,
+        );
+      },
     );
   }
 
-  Widget productGrid(double itemWidth, double itemHeight) {
-    return GridView.count(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      crossAxisSpacing: 0.0, //samping
-      mainAxisSpacing: 10.0, //atas
-      childAspectRatio: (itemWidth / itemHeight),
-      controller: new ScrollController(keepScrollOffset: false),
-      scrollDirection: Axis.vertical,
-      children: productItems
-          .map((data) => CardItem(
-                idProduct: data.idProduct,
-                title: data.title,
-                image: data.image,
-                price: data.price,
-              ))
-          .toList(),
-    );
+  ProductListBloc _productListBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
   }
 
   @override
@@ -160,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  menuGrid(),
+                  menuGrid(context),
                   Divider(
                     height: 25,
                   ),
@@ -175,7 +176,10 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  productGrid(itemWidth, itemHeight),
+                  TerbaruList(
+                    itemHeight: itemHeight,
+                    itemWidth: itemWidth,
+                  ),
                   SizedBox(
                     height: 30,
                   ),
@@ -184,5 +188,9 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void init() {
+    _productListBloc = BlocProvider.of(context)..add(FetchProudct());
   }
 }
