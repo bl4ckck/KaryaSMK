@@ -16,8 +16,6 @@ class ProductListRepo {
       var data = json.decode(response.body);
       final List<ProductListModel> list = Product.fromJson(data).productList;
 
-      // print(list.last.title);
-      // debugPrint(list.last.title);
       return list;
     }
   }

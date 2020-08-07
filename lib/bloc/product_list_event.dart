@@ -13,4 +13,4 @@ class FetchProudct extends ProductListEvent {}
 
 class InitialFetchProductEvent extends ProductListEvent {}
 
-class RefreshProductEvent extends ProductListEvent {}
+// class RefreshProductEvent extends ProductListEvent {}

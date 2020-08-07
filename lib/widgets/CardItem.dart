@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:karyasmk/screens/detail_screen/DetailScreen.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:neumorphic/neumorphic.dart';
 
@@ -17,6 +19,11 @@ class CardItem extends StatelessWidget {
       @required this.price})
       : super(key: key);
 
+  static void preload(BuildContext ctx, String path) {
+    var configuration = createLocalImageConfiguration(ctx);
+    new NetworkImage(path)..resolve(configuration);
+  }
+
   @override
   Widget build(BuildContext context) {
     int priceInt = int.parse(price);
@@ -26,20 +33,27 @@ class CardItem extends StatelessWidget {
     return NeuCard(
       curveType: CurveType.concave,
       bevel: 12,
-      margin: EdgeInsets.all(15), //15
+      margin: EdgeInsets.all(15),
       decoration: NeumorphicDecoration(borderRadius: BorderRadius.circular(8)),
       child: NeuButton(
         padding: EdgeInsets.zero,
         decoration: NeumorphicDecoration(borderRadius: BorderRadius.zero),
         onPressed: () {
-          print('Pressed !');
+          Navigator.push(
+            context,
+            new MaterialPageRoute(
+              builder: (context) => new DetailScreen(),
+            ),
+          );
         },
         child: Column(
           children: <Widget>[
-            Image.network(
-              image,
-              // width: double.infinity,
+            CachedNetworkImage(
+              imageUrl: image,
               fit: BoxFit.cover,
+              placeholder: (context, url) =>
+                  Center(child: Image.asset('assets/images/placeholder.jpg')),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -58,6 +72,8 @@ class CardItem extends StatelessWidget {
                         wordSpacing: 3,
                         fontSize: 16,
                         fontFamily: 'Montserrat',
+                        color: HexColor('#585858'),
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -67,7 +83,7 @@ class CardItem extends StatelessWidget {
                       wordSpacing: 3,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: HexColor('#474747'),
+                      color: HexColor('#fa5d43'),
                       fontFamily: 'Montserrat-bold',
                     ),
                   )

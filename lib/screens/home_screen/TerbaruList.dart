@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:karyasmk/bloc/bloc.dart';
 import 'package:karyasmk/widgets/CardItem.dart';
-import 'package:flutter/foundation.dart';
 
 class TerbaruList extends StatelessWidget {
   final double itemHeight;
@@ -16,19 +16,18 @@ class TerbaruList extends StatelessWidget {
     return BlocBuilder<ProductListBloc, ProductListState>(
       builder: (context, state) {
         if (state is ProductListLoadingState) {
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            height: 100,
-            child: Text('loading...'),
-          );
+          return Center(
+              child: Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: CircularProgressIndicator(),
+          ));
         } else if (state is ProductListStateLoaded) {
           var mystate = state.productList;
 
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 0.0,
+              mainAxisSpacing: 5.0, //10
               childAspectRatio: (itemWidth / itemHeight),
             ),
             controller: new ScrollController(keepScrollOffset: false),
@@ -44,11 +43,10 @@ class TerbaruList extends StatelessWidget {
                 image: index.thumb,
                 price: index.price,
               );
-              // return Text('awe');
             },
           );
         } else if (state is ProductListStateFailure) {
-          return Text('Cek koneksi internet anda');
+          return Center(child: Text('Failed to load data :('));
         }
         return Container();
       },

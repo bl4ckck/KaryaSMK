@@ -32,34 +32,31 @@ class _HomeScreenState extends State<HomeScreen> {
         "182t1g9f8hqw", "Lampu Flip Flop", "assets/images/circuit.png", 1000),
   ];
 
-  Widget header(BuildContext ctx) {
+  Widget header() {
     return SafeArea(
       top: true,
       child: Container(
-        // color: Colors.red,
-        // width: MediaQuery.of(ctx).size.width,
-        margin: EdgeInsets.only(top: 45, left: 15),
-        alignment: Alignment.topLeft,
+        margin: EdgeInsets.only(top: 45, bottom: 10, left: 15),
         child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Hello, Awe!',
-                    maxLines: 1,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'Karya SMK',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Hello, Awe!',
+                  maxLines: 1,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Karya SMK',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
             NeuCard(
               curveType: CurveType.emboss,
@@ -112,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget menuGrid(BuildContext ctx) {
+  Widget menuGrid() {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
@@ -123,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: menuItems.length,
-      itemBuilder: (ctx, index) {
+      itemBuilder: (BuildContext context, int index) {
         return itemGrid(
           menuItems[index].title,
           menuItems[index].image,
@@ -157,31 +154,24 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  header(context),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  menuGrid(context),
+                  header(),
+                  menuGrid(),
                   Divider(
                     height: 25,
                   ),
-                  InkWell(
-                    onTap: () {
-                      print('Pressed !');
-                    },
-                    child: SizedBox(
-                      height: 120,
-                      child: Image.asset(
-                        'assets/images/poster1.png',
-                      ),
-                    ),
-                  ),
+                  Container(
+                      // color: Colors.red,
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Popular Product',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontFamily: 'Montserrat-bold'),
+                      )),
                   TerbaruList(
                     itemHeight: itemHeight,
                     itemWidth: itemWidth,
-                  ),
-                  SizedBox(
-                    height: 30,
                   ),
                 ]),
           ),
@@ -191,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void init() {
-    _productListBloc = BlocProvider.of(context)..add(FetchProudct());
+    _productListBloc = BlocProvider.of(context)
+      ..add(InitialFetchProductEvent());
   }
 }

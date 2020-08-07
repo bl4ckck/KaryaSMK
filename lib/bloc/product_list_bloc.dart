@@ -10,7 +10,7 @@ import 'package:rxdart/rxdart.dart';
 class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   final ProductListRepo _productListRepo;
 
-  ProductListBloc(this._productListRepo) : super(ProductListStateLoaded());
+  ProductListBloc(this._productListRepo) : super(InitialProductListState());
 
   @override
   Stream<Transition<ProductListEvent, ProductListState>> transformEvents(
@@ -39,6 +39,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     if (event is FetchProudct) {
       yield* _fetchProductBaru(currentState);
     }
+    if (event is InitialFetchProductEvent) {
+      yield* _initialEventToState(currentState);
+    }
   }
 
   Stream<ProductListState> _fetchProductBaru(
@@ -56,10 +59,50 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     //   yield ProductListStateFailure(msg: e.toString());
     // }
 
+//FIX BISA
+    // try {
+    //   final List<ProductListModel> list =
+    //       await _productListRepo.getProductList();
+
+    //   yield ProductListLoadingState();
+    //   yield ProductListStateLoaded(productList: list);
+    // } catch (e) {
+    //   yield ProductListStateFailure(msg: e.toString());
+    // }
+
     try {
-      final List<ProductListModel> list =
-          await _productListRepo.getProductList();
-      yield ProductListStateLoaded(productList: list);
+      if (currentState is InitialProductListState) {
+        yield ProductListLoadingState();
+        final List<ProductListModel> list =
+            await _productListRepo.getProductList();
+        yield ProductListStateLoaded(productList: list);
+      }
+      if (currentState is ProductListStateLoaded) {
+        final List<ProductListModel> list =
+            await _productListRepo.getProductList();
+        yield list.isEmpty
+            ? currentState.productList
+            : ProductListStateLoaded(
+                productList: currentState.productList + list,
+              );
+      }
+    } catch (e) {
+      yield ProductListStateFailure(msg: e.toString());
+    }
+  }
+
+  Stream<ProductListState> _initialEventToState(
+      ProductListState currentState) async* {
+    try {
+      if (currentState is InitialProductListState) {
+        yield ProductListLoadingState();
+        final List<ProductListModel> list =
+            await _productListRepo.getProductList();
+        yield ProductListStateLoaded(productList: list);
+      }
+      if (currentState is ProductListStateLoaded) {
+        yield ProductListStateLoaded(productList: currentState.productList);
+      }
     } catch (e) {
       yield ProductListStateFailure(msg: e.toString());
     }
