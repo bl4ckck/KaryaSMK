@@ -19,11 +19,6 @@ class CardItem extends StatelessWidget {
       @required this.price})
       : super(key: key);
 
-  static void preload(BuildContext ctx, String path) {
-    var configuration = createLocalImageConfiguration(ctx);
-    new NetworkImage(path)..resolve(configuration);
-  }
-
   @override
   Widget build(BuildContext context) {
     int priceInt = int.parse(price);
