@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:karyasmk/screens/latihan.dart';
 import 'package:neumorphic/neumorphic.dart';
 
 class MenuItem extends StatelessWidget {
@@ -17,7 +18,12 @@ class MenuItem extends StatelessWidget {
       child: NeuButton(
         decoration: NeumorphicDecoration(borderRadius: BorderRadius.zero),
         onPressed: () {
-          print('Pressed !');
+          Navigator.push(
+            context,
+            new MaterialPageRoute(
+              builder: (context) => new Latihan(),
+            ),
+          );
         },
         child: Column(
           children: <Widget>[

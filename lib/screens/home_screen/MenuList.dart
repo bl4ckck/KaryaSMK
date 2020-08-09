@@ -12,6 +12,7 @@ class MenuList extends StatelessWidget {
       MenuModel("Electronic", "assets/images/circuit.png"),
       MenuModel("Handycraft", "assets/images/crayon.png"),
       MenuModel("Multimedia", "assets/images/multimedia.png"),
+      MenuModel("Food", "assets/images/food.png"),
       MenuModel("Others", "assets/images/box.png"),
     ];
 

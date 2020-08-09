@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:karyasmk/models/ProductModel.dart';
 import 'package:karyasmk/models/models.dart';
 import 'package:karyasmk/repositories/repository.dart';
 import 'package:bloc/bloc.dart';

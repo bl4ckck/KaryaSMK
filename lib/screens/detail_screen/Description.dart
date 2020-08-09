@@ -11,8 +11,8 @@ class Description extends StatefulWidget {
 }
 
 class _DescriptionState extends State<Description> {
-  num _counter = 0;
-  num _defaultValue = 1;
+  num counter = 0;
+  num defaultValue = 1;
 
   Widget topItem() {
     return Row(
@@ -20,7 +20,7 @@ class _DescriptionState extends State<Description> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         QtyCounter(
-          initialValue: _defaultValue,
+          initialValue: defaultValue,
           minValue: 1,
           maxValue: 10,
           step: 1,
@@ -30,8 +30,8 @@ class _DescriptionState extends State<Description> {
           decimalPlaces: 0,
           onChanged: (value) {
             setState(() {
-              _defaultValue = value;
-              _counter = value;
+              defaultValue = value;
+              counter = value;
             });
           },
         ),
