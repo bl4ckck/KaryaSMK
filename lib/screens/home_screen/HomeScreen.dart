@@ -27,37 +27,37 @@ class _HomeScreenState extends State<HomeScreen> {
     final double itemWidth = size.width / 2;
 
     return Scaffold(
-      backgroundColor: NeuTheme.of(context).backgroundColor,
-      body: SingleChildScrollView(
-        child: DefaultTextStyle(
-          style: TextStyle(fontFamily: 'Montserrat', color: Colors.black),
-          child: Container(
-            margin: EdgeInsets.only(left: 16, right: 16),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  AppBarHome(),
-                  MenuList(),
-                  Divider(
-                    height: 25,
-                  ),
-                  Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Popular Product',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            fontFamily: 'Montserrat-bold'),
-                      )),
-                  TerbaruList(
-                    itemHeight: itemHeight,
-                    itemWidth: itemWidth,
-                  ),
-                ]),
+        backgroundColor: NeuTheme.of(context).backgroundColor,
+        body: SingleChildScrollView(
+          child: DefaultTextStyle(
+            style: TextStyle(fontFamily: 'Montserrat', color: Colors.black),
+            child: Container(
+              margin: EdgeInsets.only(left: 16, right: 16),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    AppBarHome(),
+                    MenuList(),
+                    Divider(
+                      height: 25,
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Popular Product',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              fontFamily: 'Montserrat-bold'),
+                        )),
+                    TerbaruList(
+                      itemHeight: itemHeight,
+                      itemWidth: itemWidth,
+                    ),
+                  ]),
+            ),
           ),
         ),
-      ),
     );
   }
 

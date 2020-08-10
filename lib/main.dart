@@ -11,13 +11,6 @@ import 'bloc/bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: Color(0xFFf2f2f2),
-  ));
 
   runApp(MyApp());
 }
@@ -27,14 +20,6 @@ Color _color = Color(0xFFf2f2f2);
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   statusBarColor: Colors.transparent,
-    //   statusBarBrightness: Brightness.light,
-    //   statusBarIconBrightness: Brightness.dark,
-    //   systemNavigationBarIconBrightness: Brightness.dark,
-    //   systemNavigationBarColor: _color,
-    // ));
-
     return MultiProvider(
       providers: [
         BlocProvider<ProductListBloc>(
@@ -45,13 +30,13 @@ class MyApp extends StatelessWidget {
       child: NeuApp(
         title: 'Karya SMK',
         theme: NeuThemeData(
-          platform: TargetPlatform.iOS,
+          platform: TargetPlatform.android,
           primaryColor: Color.lerp(_color, Colors.white, 0.2),
           backgroundColor: Color.lerp(_color, Colors.black, 0.005),
           scaffoldBackgroundColor: _color,
           dialogBackgroundColor: Colors.grey[300],
           appBarTheme: AppBarTheme(
-            brightness: Brightness.light,
+            brightness: Brightness.dark,
             color: _color,
             textTheme: TextTheme(
               headline6: TextStyle(

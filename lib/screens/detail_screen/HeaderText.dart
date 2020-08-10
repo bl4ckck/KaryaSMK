@@ -22,8 +22,8 @@ class HeaderText extends StatelessWidget {
             style: TextStyle(
               wordSpacing: 3,
               fontSize: 14,
-              fontFamily: 'Montserrat-bold',
-              fontWeight: FontWeight.bold,
+              // fontFamily: 'Montserrat',
+              // fontWeight: FontWeight.bold,
             ),
           ),
           Divider(
@@ -35,8 +35,8 @@ class HeaderText extends StatelessWidget {
             '$title',
             maxLines: 2,
             style: TextStyle(
-              fontSize: 27,
-              fontFamily: 'Montserrat',
+              fontSize: 23,
+              fontFamily: 'Montserrat-bold',
             ),
           ),
         ],

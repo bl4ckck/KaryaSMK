@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:karyasmk/models/models.dart';
-import 'package:karyasmk/screens/home_screen/home_screen.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:neumorphic/neumorphic.dart';
 
@@ -58,14 +57,11 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    final double itemHeight = ((size.height - kToolbarHeight - 24) / 2) + 50;
-    final double itemWidth = size.width / 2;
-
     return Scaffold(
         backgroundColor: NeuTheme.of(context).backgroundColor,
         appBar: customAppBar(context),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 18.0),
           child: FloatingActionButton.extended(
             elevation: 4.0,
             backgroundColor: HexColor('#ffa451'),
@@ -74,7 +70,6 @@ class DetailScreen extends StatelessWidget {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: custBottomBar(),
         body: SingleChildScrollView(
             child: Container(
                 child: Column(

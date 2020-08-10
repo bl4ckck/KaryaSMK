@@ -1,3 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:expand_widget/expand_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:karyasmk/helper/currencyFormat.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
@@ -25,29 +27,33 @@ class _DescriptionState extends State<Description> {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        QtyCounter(
-          initialValue: defaultValue,
-          minValue: 1,
-          maxValue: widget.qty,
-          step: 1,
-          buttonSize: 40,
-          color: NeuTheme.of(context).backgroundColor,
-          textStyle: TextStyle(fontSize: 20),
-          decimalPlaces: 0,
-          onChanged: (value) {
-            setState(() {
-              defaultValue = value;
-              counter = value;
-            });
-          },
+        Expanded(
+          child: QtyCounter(
+            initialValue: defaultValue,
+            minValue: 1,
+            maxValue: widget.qty,
+            step: 1,
+            buttonSize: 40,
+            color: NeuTheme.of(context).backgroundColor,
+            textStyle: TextStyle(fontSize: 20),
+            decimalPlaces: 0,
+            onChanged: (value) {
+              setState(() {
+                defaultValue = value;
+                counter = value;
+              });
+            },
+          ),
         ),
-        Text(
-          currencyFormat(widget.price),
-          style: TextStyle(
-            wordSpacing: 15,
-            fontSize: 23,
-            color: HexColor('#2f2f2f'),
-            fontFamily: 'Montserrat-bold',
+        Expanded(
+          child: AutoSizeText(
+            currencyFormat(154005555),
+            maxLines: 1,
+            style: TextStyle(
+              wordSpacing: 15,
+              fontSize: 23,
+              color: HexColor('#2f2f2f'),
+            ),
           ),
         ),
       ],
@@ -58,7 +64,7 @@ class _DescriptionState extends State<Description> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      margin: EdgeInsets.only(left: 18, right: 18, top: 8, bottom: 40),
+      margin: EdgeInsets.only(left: 18, right: 18, top: 8, bottom: 70),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -73,8 +79,9 @@ class _DescriptionState extends State<Description> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          Text(
+          ExpandText(
             widget.desc,
+            expandOnGesture: false,
             style: TextStyle(
                 wordSpacing: 3,
                 height: 2,

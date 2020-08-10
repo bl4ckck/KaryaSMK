@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
-import 'package:karyasmk/models/models.dart';
 import 'package:karyasmk/screens/detail_screen/DetailScreen.dart';
 
 class IndexDetail extends StatefulWidget {
