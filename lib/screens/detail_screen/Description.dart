@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:karyasmk/helper/currencyFormat.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:karyasmk/widgets/QtyCounter.dart';
 import 'package:neumorphic/neumorphic.dart';
 
 class Description extends StatefulWidget {
-  const Description({Key key}) : super(key: key);
+  final String desc;
+  final num qty, price;
+
+  const Description(
+      {Key key, @required this.desc, @required this.qty, @required this.price})
+      : super(key: key);
 
   @override
   _DescriptionState createState() => _DescriptionState();
@@ -22,7 +28,7 @@ class _DescriptionState extends State<Description> {
         QtyCounter(
           initialValue: defaultValue,
           minValue: 1,
-          maxValue: 10,
+          maxValue: widget.qty,
           step: 1,
           buttonSize: 40,
           color: NeuTheme.of(context).backgroundColor,
@@ -36,7 +42,7 @@ class _DescriptionState extends State<Description> {
           },
         ),
         Text(
-          'Rp115.100.000',
+          currencyFormat(widget.price),
           style: TextStyle(
             wordSpacing: 15,
             fontSize: 23,
@@ -60,7 +66,7 @@ class _DescriptionState extends State<Description> {
           Padding(
             padding: const EdgeInsets.only(top: 25.0, bottom: 25),
             child: Text(
-              'Stok Barang: 50 pcs',
+              "Stok Barang: " + widget.qty.toString() + " pcs",
               style: TextStyle(
                   fontSize: 16,
                   color: HexColor('#ffa554'),
@@ -68,7 +74,7 @@ class _DescriptionState extends State<Description> {
             ),
           ),
           Text(
-            'Et duo diam ea aliquyam duo consetetur magna dolor aliquyam ipsum, est accusam est accusam lorem dolore, eirmod sit erat dolor invidunt takimata. Sanctus sed dolor ea dolor lorem erat dolor. Consetetur vero dolores sed justo rebum sea sed vero amet. Et sit sanctus dolor voluptua sit erat no labore. Voluptua kasd labore takimata diam diam clita, eos et aliquyam tempor sed sit nonumy. Aliquyam kasd dolores magna justo, amet eos dolor takimata labore accusam dolor et elitr, clita et voluptua vero voluptua. Dolor ut stet rebum elitr dolore, consetetur justo sed nonumy vero et sea rebum, elitr dolor eirmod. awd awd awd ',
+            widget.desc,
             style: TextStyle(
                 wordSpacing: 3,
                 height: 2,

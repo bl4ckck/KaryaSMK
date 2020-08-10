@@ -3,8 +3,10 @@ import 'package:karyasmk/widgets/HexColor.dart';
 
 class HeaderText extends StatelessWidget {
   final Size size;
+  final String title;
 
-  const HeaderText({Key key, @required this.size}) : super(key: key);
+  const HeaderText({Key key, @required this.title, @required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class HeaderText extends StatelessWidget {
             color: HexColor('#f7a194'),
           ),
           Text(
-            'Sepeda Listrik Mars panjang',
+            '$title',
             maxLines: 2,
             style: TextStyle(
               fontSize: 27,

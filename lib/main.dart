@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:karyasmk/repositories/product_detail_repo.dart';
 import 'package:karyasmk/repositories/product_list_repo.dart';
 import 'package:karyasmk/screens/home_screen/HomeScreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +39,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<ProductListBloc>(
             create: (context) => ProductListBloc(ProductListRepo())),
+        BlocProvider<ProductDetailBloc>(
+            create: (context) => ProductDetailBloc(ProductDetailRepo())),
       ],
       child: NeuApp(
         title: 'Karya SMK',

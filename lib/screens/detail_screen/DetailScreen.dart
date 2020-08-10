@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:karyasmk/models/models.dart';
+import 'package:karyasmk/screens/home_screen/home_screen.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:neumorphic/neumorphic.dart';
 
 import 'detail_screen.dart';
 
 class DetailScreen extends StatelessWidget {
+  final List<GetDataDetail> data;
+
+  const DetailScreen({Key key, @required this.data}) : super(key: key);
+
   Widget customAppBar(BuildContext ctx) {
     return AppBar(
       backgroundColor: NeuTheme.of(ctx).backgroundColor,
@@ -52,6 +58,9 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+    final double itemHeight = ((size.height - kToolbarHeight - 24) / 2) + 50;
+    final double itemWidth = size.width / 2;
+
     return Scaffold(
         backgroundColor: NeuTheme.of(context).backgroundColor,
         appBar: customAppBar(context),
@@ -70,9 +79,12 @@ class DetailScreen extends StatelessWidget {
             child: Container(
                 child: Column(
           children: <Widget>[
-            HeaderText(size: size),
-            DisplayImage(size: size),
-            Description(),
+            HeaderText(title: data[0].title, size: size),
+            DisplayImage(url: data[0].thumb, size: size),
+            Description(
+                desc: data[0].description,
+                qty: data[0].quantity,
+                price: data[0].price)
           ],
         ))));
   }

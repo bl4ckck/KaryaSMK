@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:karyasmk/screens/detail_screen/DetailScreen.dart';
+import 'package:karyasmk/screens/detail_screen/index_detail.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:neumorphic/neumorphic.dart';
 
@@ -9,7 +9,7 @@ class CardItem extends StatelessWidget {
   final String idProduct;
   final String title;
   final String image;
-  final String price;
+  final num price;
 
   const CardItem(
       {Key key,
@@ -21,9 +21,7 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int priceInt = int.parse(price);
-
-    var fPrice = NumberFormat.currency(name: 'Rp').format(priceInt);
+    var fPrice = NumberFormat.currency(name: 'Rp').format(price);
 
     return NeuCard(
       curveType: CurveType.concave,
@@ -37,7 +35,9 @@ class CardItem extends StatelessWidget {
           Navigator.push(
             context,
             new MaterialPageRoute(
-              builder: (context) => new DetailScreen(),
+              builder: (context) => new IndexDetail(
+                endpoint: idProduct,
+              ),
             ),
           );
         },

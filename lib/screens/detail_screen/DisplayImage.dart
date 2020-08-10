@@ -3,8 +3,10 @@ import 'package:karyasmk/widgets/ImageViewWrapper.dart';
 
 class DisplayImage extends StatelessWidget {
   final Size size;
+  final String url;
 
-  const DisplayImage({Key key, @required this.size}) : super(key: key);
+  const DisplayImage({Key key, @required this.url, @required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +15,9 @@ class DisplayImage extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ImageViewWrapper(
+            builder: (context) => ImageViewWrapper(
               backgroundDecoration: BoxDecoration(color: Colors.white),
-              imageProvider: AssetImage("assets/images/sepeda.jpg"),
+              imageProvider: NetworkImage(url),
             ),
           ),
         );
@@ -23,8 +25,8 @@ class DisplayImage extends StatelessWidget {
       child: Container(
         width: size.width,
         height: 200,
-        child: Image.asset(
-          'assets/images/sepeda.jpg',
+        child: Image.network(
+          url,
           height: double.infinity,
           fit: BoxFit.cover,
         ),
