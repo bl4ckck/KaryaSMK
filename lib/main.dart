@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:karyasmk/repositories/auth_repository.dart';
 import 'package:karyasmk/repositories/product_detail_repo.dart';
 import 'package:karyasmk/repositories/product_list_repo.dart';
 import 'package:karyasmk/screens/home_screen/HomeScreen.dart';
@@ -8,9 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:neumorphic/neumorphic.dart';
 import 'package:provider/provider.dart';
 import 'bloc/bloc.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final directory = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+  Hive.openBox('session');
 
   runApp(MyApp());
 }
@@ -26,6 +34,7 @@ class MyApp extends StatelessWidget {
             create: (context) => ProductListBloc(ProductListRepo())),
         BlocProvider<ProductDetailBloc>(
             create: (context) => ProductDetailBloc(ProductDetailRepo())),
+        BlocProvider<AuthBloc>(create: (context) => AuthBloc(AuthRepository())),
       ],
       child: NeuApp(
         title: 'Karya SMK',

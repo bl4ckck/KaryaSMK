@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:karyasmk/screens/index_login_screen.dart';
 import 'package:neumorphic/neumorphic.dart';
 
 class AppBarHome extends StatelessWidget {
@@ -37,7 +38,12 @@ class AppBarHome extends StatelessWidget {
                   NeumorphicDecoration(borderRadius: BorderRadius.circular(38)),
               child: NeuButton(
                 onPressed: () {
-                  print('Pressed !');
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                      builder: (context) => new IndexLoginScreen(),
+                    ),
+                  );
                 },
                 child: Image.asset(
                   'assets/images/avatar.png',
