@@ -11,3 +11,7 @@ class FetchSession extends AuthEvent {
   final String role;
   FetchSession(this.role);
 }
+
+class SignIn extends AuthEvent {}
+
+class Register extends AuthEvent {}

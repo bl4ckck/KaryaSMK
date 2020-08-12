@@ -15,6 +15,10 @@ class AuthRepository {
     return role;
   }
 
+  Future<void> login() async {
+    return;
+  }
+
   Future<void> deleteToken() async {
     /// delete from keystore/keychain
     await Future.delayed(Duration(seconds: 1));

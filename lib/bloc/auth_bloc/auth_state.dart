@@ -28,3 +28,9 @@ class AuthFailureState extends AuthState {
   @override
   List<Object> get props => [msg];
 }
+
+class LoginlLoadingState extends AuthState {}
+
+class LoginlSuccessState extends AuthState {}
+
+class LoginlFailState extends AuthState {}

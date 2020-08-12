@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:karyasmk/screens/detail_screen/DetailScreen.dart';
+import 'package:karyasmk/widgets/LoadingBuilder.dart';
 
 class IndexDetail extends StatefulWidget {
   final String endpoint;
@@ -25,21 +26,19 @@ class _IndexDetailState extends State<IndexDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
-        builder: (context, state) {
-      if (state is ProductDetailLoadingState) {
-        return Center(
-            child: Padding(
-          padding: const EdgeInsets.only(top: 18.0),
-          child: CircularProgressIndicator(),
-        ));
-      } else if (state is ProductDetailLoadedState) {
-        return DetailScreen(data: state.data);
-      } else if (state is ProductDetailFailureState) {
-        return Center(child: Text('Failed to load data :('));
-      }
+    return Scaffold(
+      body: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+          builder: (context, state) {
+        if (state is ProductDetailLoadingState) {
+          return LoadingBuilder();
+        } else if (state is ProductDetailLoadedState) {
+          return DetailScreen(data: state.data);
+        } else if (state is ProductDetailFailureState) {
+          return Center(child: Text('Failed to load data :('));
+        }
 
-      return Container();
-    });
+        return Container();
+      }),
+    );
   }
 }

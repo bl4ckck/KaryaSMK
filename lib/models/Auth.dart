@@ -9,12 +9,24 @@ class Auth {
 }
 
 class AuthUser {
-  String uuid;
+  String uid;
   String email;
+  String nama;
+  String type;
+  String code;
+  String message;
 
-  AuthUser({this.uuid, this.email});
+  AuthUser(
+      {this.uid, this.email, this.nama, this.type, this.code, this.message});
 
   factory AuthUser.fromJson(Map<String, dynamic> json) {
-    return AuthUser(uuid: json['uuid'], email: json['email']);
+    return AuthUser(
+      uid: json['uid'],
+      email: json['email'],
+      nama: json['nama'],
+      type: json['type'],
+      code: json['code'],
+      message: json['message'],
+    );
   }
 }

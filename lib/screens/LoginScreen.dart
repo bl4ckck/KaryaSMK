@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
+import 'package:karyasmk/helper/hive/session_user.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -14,10 +15,13 @@ class _LoginScreenState extends State<LoginScreen> {
   AuthBloc _authBloc;
 
   void signInStudent() async {
-    var box = Hive.box('session');
-    box.put('role', 'student');
+    final box = await Hive.openBox('sessionUser');
 
-    var role = box.get('role');
+    var user = SessionUser(
+        '13524y6t', 'student@karyasmk.com', 'student namanya', 'student');
+    box.add(user);
+
+    var role = box.getAt(0).type;
 
     _authBloc = BlocProvider.of<AuthBloc>(context);
     _authBloc.add(FetchSession(role));

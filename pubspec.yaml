@@ -42,8 +42,11 @@ dependencies:
   dio: ^3.0.10
   expand_widget: ^1.0.0+1
   hive: ^1.4.3
+  flutter_spinkit: ^4.1.2+1
 
 dev_dependencies:
+  hive_generator: ^0.7.1
+  build_runner:
   flutter_test:
     sdk: flutter
 

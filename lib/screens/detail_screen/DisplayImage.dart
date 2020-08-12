@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:karyasmk/widgets/ImageViewWrapper.dart';
 
@@ -25,10 +26,13 @@ class DisplayImage extends StatelessWidget {
       child: Container(
         width: size.width,
         height: 200,
-        child: Image.network(
-          url,
-          height: double.infinity,
+        child: CachedNetworkImage(
+          imageUrl: url,
           fit: BoxFit.cover,
+          height: double.infinity,
+          placeholder: (context, url) =>
+              Center(child: Image.asset('assets/images/placeholder.jpg')),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),
     );

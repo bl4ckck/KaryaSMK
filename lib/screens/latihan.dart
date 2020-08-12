@@ -22,7 +22,7 @@ class _LatihanState extends State<Latihan> {
     Dio dio = new Dio();
     Response response;
     response = await dio.post('http://localhost:5000/api/v1/auth',
-        data: {"email": "pembeli@karyasmk.com", "password": "karyasmk"});
+        data: {"email": "pembeli@karyasmk.com", "password": "1karyasmk"});
 
     // if (response.statusCode == 200) {
     var data = response.data;
@@ -34,7 +34,7 @@ class _LatihanState extends State<Latihan> {
 
     // listAuth = list;
 
-    print(shape.user.email);
+    print(shape.user.uid);
     // print(list);
     return null;
     // }

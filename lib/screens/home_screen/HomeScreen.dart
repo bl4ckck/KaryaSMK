@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/bloc.dart';
 import 'package:neumorphic/neumorphic.dart';
 import 'home_screen.dart';
@@ -18,16 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     init();
-    loadBox();
-  }
-
-  void loadBox() async {
-    final box = await Hive.openBox('session');
-    // var box = Hive.box('session');
-
-    var role = box.get('role');
-
-    print('Rolenya: $role');
   }
 
   @override
@@ -55,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                       alignment: Alignment.center,
                       child: Text(
-                        'Popular Product',
+                        'All Products',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,

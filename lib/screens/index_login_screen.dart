@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/screens/LoginScreen.dart';
 import 'package:karyasmk/screens/seller_screen/AuthSellerScreen.dart';
+import 'package:karyasmk/widgets/LoadingBuilder.dart';
 
 class IndexLoginScreen extends StatefulWidget {
   IndexLoginScreen({Key key}) : super(key: key);
@@ -23,23 +24,13 @@ class _LoginScreenState extends State<IndexLoginScreen> {
   }
 
   void loadBox() async {
-    final box = await Hive.openBox('session');
-    var role = box.get('role');
+    final box = await Hive.openBox('sessionUser');
 
     _authBloc = BlocProvider.of<AuthBloc>(context);
-    _authBloc.add(FetchSession(role));
+    _authBloc.add(FetchSession(box.isNotEmpty ? box.getAt(0).type : 'general'));
 
-    print('Rolenya: $role');
+    print('Rolenya:' + box.getAt(0).nama);
   }
-
-  // void doLoginAsStudent() async {
-  //   var box = Hive.box('session');
-  //   box.put('role', 'student');
-
-  //   var role = box.get('role');
-
-  //   print('Rolenya: $role');
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +38,7 @@ class _LoginScreenState extends State<IndexLoginScreen> {
         appBar: AppBar(),
         body: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           if (state is AuthlLoadingState) {
-            return Center(
-                child: Padding(
-              padding: const EdgeInsets.only(top: 18.0),
-              child: CircularProgressIndicator(),
-            ));
+            return LoadingBuilder();
           } else if (state is AuthLoadedState) {
             if (state.role == 'student') {
               return AuthSellerScreen();

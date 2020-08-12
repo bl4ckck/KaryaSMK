@@ -14,15 +14,14 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
   AuthBloc _authBloc;
 
   void singOutStudent() async {
-    var box = Hive.box('session');
-    box.put('role', 'general');
+    final box = await Hive.openBox('sessionUser');
 
-    var role = box.get('role');
+    box.deleteAt(0);
 
     _authBloc = BlocProvider.of<AuthBloc>(context);
-    _authBloc.add(FetchSession(role));
+    _authBloc.add(FetchSession('general'));
 
-    print('Rolenya: $role');
+    print('Rolenya: general');
   }
 
   @override

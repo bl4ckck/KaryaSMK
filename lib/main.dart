@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:karyasmk/helper/hive/session_user.dart';
 import 'package:karyasmk/repositories/auth_repository.dart';
 import 'package:karyasmk/repositories/product_detail_repo.dart';
 import 'package:karyasmk/repositories/product_list_repo.dart';
@@ -19,6 +20,8 @@ void main() async {
   final directory = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   Hive.openBox('session');
+  Hive.openBox('sessionUser');
+  Hive.registerAdapter(SessionUserAdapter());
 
   runApp(MyApp());
 }
