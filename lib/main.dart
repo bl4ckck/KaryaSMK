@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
@@ -43,24 +42,22 @@ class MyApp extends StatelessWidget {
         title: 'Karya SMK',
         theme: NeuThemeData(
           platform: TargetPlatform.android,
-          primaryColor: Color.lerp(_color, Colors.white, 0.2),
+          primaryColor: Color.lerp(_color, Colors.black, 0.2),
           backgroundColor: Color.lerp(_color, Colors.black, 0.005),
-          scaffoldBackgroundColor: _color,
-          dialogBackgroundColor: Colors.grey[300],
-          appBarTheme: AppBarTheme(
-            brightness: Brightness.dark,
-            color: _color,
-            textTheme: TextTheme(
-              headline6: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            iconTheme: IconThemeData(
-              color: Colors.black,
-            ),
-          ),
+          // appBarTheme: AppBarTheme(
+          //   brightness: Brightness.dark,
+          //   // color: _color,
+          //   textTheme: TextTheme(
+          //     headline6: TextStyle(
+          //       color: Colors.black,
+          //       fontSize: 20,
+          //       fontWeight: FontWeight.w500,
+          //     ),
+          //   ),
+          //   iconTheme: IconThemeData(
+          //     color: Colors.black,
+          //   ),
+          // ),
         ),
         home: HomeScreen(),
       ),

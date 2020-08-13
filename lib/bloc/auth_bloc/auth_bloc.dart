@@ -25,5 +25,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthFailureState(msg: e.toString());
       }
     }
+
+    if (event is SignIn) {
+      yield AuthLoadedState();
+      try {
+        final userData =
+            await _authRepo.login(email: event.email, password: event.password);
+        yield AuthLoadedState(role: userData);
+      } catch (_) {
+        yield AuthFailureState(msg: 'error');
+      }
+    }
   }
 }

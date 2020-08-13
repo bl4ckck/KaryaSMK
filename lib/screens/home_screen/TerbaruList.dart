@@ -56,7 +56,7 @@ class TerbaruList extends StatelessWidget {
                     child: Text(
                       'Load More...',
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14.5,
                           color: Colors.blue,
                           fontFamily: 'Roboto'),
                     )),

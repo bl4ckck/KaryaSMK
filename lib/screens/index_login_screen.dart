@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
-import 'package:karyasmk/screens/LoginScreen.dart';
+import 'package:karyasmk/screens/login_screen/LoginScreen.dart';
 import 'package:karyasmk/screens/seller_screen/AuthSellerScreen.dart';
 import 'package:karyasmk/widgets/LoadingBuilder.dart';
+import 'package:neumorphic/neumorphic.dart';
 
 class IndexLoginScreen extends StatefulWidget {
   IndexLoginScreen({Key key}) : super(key: key);
@@ -28,28 +29,43 @@ class _LoginScreenState extends State<IndexLoginScreen> {
 
     _authBloc = BlocProvider.of<AuthBloc>(context);
     _authBloc.add(FetchSession(box.isNotEmpty ? box.getAt(0).type : 'general'));
+  }
 
-    print('Rolenya:' + box.getAt(0).nama);
+  Widget customAppBar(BuildContext ctx) {
+    return AppBar(
+      backgroundColor: NeuTheme.of(ctx).backgroundColor,
+      elevation: 0,
+      leading: IconButton(
+        iconSize: 27,
+        color: Colors.black,
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.pop(ctx, true);
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: customAppBar(context),
+        backgroundColor: NeuTheme.of(context).backgroundColor,
         body: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           if (state is AuthlLoadingState) {
             return LoadingBuilder();
           } else if (state is AuthLoadedState) {
             if (state.role == 'student') {
               return AuthSellerScreen();
-            } else if (state.role == 'general' || state.role == null) {
-              return LoginScreen();
             }
+            // else if (state.role == 'general' || state.role == null) {
+            //   return LoginScreen();
+            // }
           } else if (state is AuthFailureState) {
-            return Center(child: Text('Failed to load data :('));
+            return LoginScreen();
           }
 
-          return Container();
+          return LoginScreen();
         }));
   }
 }

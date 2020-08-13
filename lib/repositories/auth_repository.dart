@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+import 'package:karyasmk/helper/hive/session_user.dart';
+import 'package:karyasmk/models/Auth.dart';
 
 class AuthRepository {
   // Future<String> authenticate({
@@ -8,6 +14,9 @@ class AuthRepository {
   //   await Future.delayed(Duration(seconds: 1));
   //   return 'token';
   // }
+
+  final dio = new Dio();
+
   Future<String> authenticate({
     @required String role,
   }) async {
@@ -15,8 +24,29 @@ class AuthRepository {
     return role;
   }
 
-  Future<void> login() async {
-    return;
+  Future<String> login({
+    @required String email,
+    @required String password,
+  }) async {
+    Response response;
+    response = await dio.post('http://localhost:5000/api/v1/auth',
+        data: {"email": email, "password": password});
+
+    final jsonResponse = json.decode(response.toString());
+
+    Auth data = new Auth.fromJson(jsonResponse);
+
+    if (data.user.code == 'success') {
+      var user = SessionUser(
+          data.user.uid, data.user.email, data.user.nama, data.user.type);
+
+      final box = await Hive.openBox('sessionUser');
+      box.add(user);
+
+      return data.user.type;
+    } else if (data.user.code == 'error') return 'general-error';
+
+    return 'general';
   }
 
   Future<void> deleteToken() async {
