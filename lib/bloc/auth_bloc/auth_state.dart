@@ -28,3 +28,14 @@ class AuthFailureState extends AuthState {
   @override
   List<Object> get props => [msg];
 }
+
+class AuthSwitchScreenLoadingState extends AuthState {}
+
+class AuthSwitchedScreenState extends AuthState {
+  final String screen;
+
+  AuthSwitchedScreenState({this.screen});
+
+  @override
+  List<Object> get props => [screen];
+}

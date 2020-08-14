@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
-import 'package:karyasmk/screens/login_screen/LoginScreen.dart';
+import 'package:karyasmk/screens/login_screen/index_login_screen.dart';
 import 'package:karyasmk/screens/seller_screen/AuthSellerScreen.dart';
 import 'package:karyasmk/widgets/LoadingBuilder.dart';
 import 'package:neumorphic/neumorphic.dart';
 
-class IndexLoginScreen extends StatefulWidget {
-  IndexLoginScreen({Key key}) : super(key: key);
+class IndexProfileScreen extends StatefulWidget {
+  IndexProfileScreen({Key key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<IndexLoginScreen> {
+class _LoginScreenState extends State<IndexProfileScreen> {
   AuthBloc _authBloc;
 
   @override
@@ -59,13 +59,13 @@ class _LoginScreenState extends State<IndexLoginScreen> {
               return AuthSellerScreen();
             }
             // else if (state.role == 'general' || state.role == null) {
-            //   return LoginScreen();
+            //   return IndexLoginScreen();
             // }
           } else if (state is AuthFailureState) {
-            return LoginScreen();
+            return IndexLoginScreen();
           }
 
-          return LoginScreen();
+          return IndexLoginScreen();
         }));
   }
 }

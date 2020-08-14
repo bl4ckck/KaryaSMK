@@ -24,31 +24,27 @@ class TerbaruList extends StatelessWidget {
         } else if (state is ProductListStateLoaded) {
           var mystate = state.productList;
 
-          return Column(
-            children: <Widget>[
-              GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 5.0,
-                  childAspectRatio: (itemWidth / itemHeight),
-                ),
-                controller: new ScrollController(keepScrollOffset: false),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: mystate.length,
-                itemBuilder: (BuildContext context, int i) {
-                  var index = mystate[i];
+          return GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 5.0,
+              childAspectRatio: (itemWidth / itemHeight),
+            ),
+            controller: new ScrollController(keepScrollOffset: false),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: mystate.length,
+            itemBuilder: (BuildContext context, int i) {
+              var index = mystate[i];
 
-                  return CardItem(
-                    idProduct: index.idProduct,
-                    title: index.title,
-                    image: index.thumb,
-                    price: index.price,
-                  );
-                },
-              ),
-            ],
+              return CardItem(
+                idProduct: index.idProduct,
+                title: index.title,
+                image: index.thumb,
+                price: index.price,
+              );
+            },
           );
         } else if (state is ProductListStateFailure) {
           return Center(child: Text('Failed to load data :('));

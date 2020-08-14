@@ -4,14 +4,14 @@ import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:karyasmk/widgets/LoadingBuilder.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   AuthBloc _authBloc;
   AuthBloc _switchScreen;
   bool isLoading = false;
@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void switchScreen() async {
     _switchScreen = BlocProvider.of<AuthBloc>(context);
-    _switchScreen.add(AuthSwitchScreenEvent(screen: 'register'));
+    _switchScreen.add(AuthSwitchScreenEvent(screen: 'login'));
   }
 
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 15.0);
@@ -41,8 +41,9 @@ class _LoginScreenState extends State<LoginScreen> {
       obscureText: false,
       style: style,
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           hintText: "Email",
+          isDense: true,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
     );
   }
@@ -53,13 +54,14 @@ class _LoginScreenState extends State<LoginScreen> {
       obscureText: true,
       style: style,
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          isDense: true,
           hintText: "Password",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
     );
   }
 
-  Widget loginButton() {
+  Widget registerButton() {
     return Material(
       elevation: 0,
       borderRadius: BorderRadius.circular(30.0),
@@ -70,29 +72,10 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           doSignIn();
         },
-        child: Text("Login",
+        child: Text("Sign Up",
             textAlign: TextAlign.center,
             style: style.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold)),
-      ),
-    );
-  }
-
-  Widget registerButton() {
-    return Material(
-      elevation: 0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: HexColor('#e1e3e5'),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
-          switchScreen();
-        },
-        child: Text("Register",
-            textAlign: TextAlign.center,
-            style: style.copyWith(
-                color: Colors.black, fontWeight: FontWeight.bold)),
       ),
     );
   }
@@ -115,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: 120.0,
+              height: 100.0,
               child: Image.asset(
                 "assets/images/karya_logo.jpg",
                 fit: BoxFit.contain,
@@ -135,7 +118,15 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 35.0,
             ),
-            loginButton(),
+            passwordField(),
+            SizedBox(
+              height: 35.0,
+            ),
+            passwordField(),
+            SizedBox(
+              height: 35.0,
+            ),
+            registerButton(),
             SizedBox(
               height: 15.0,
             ),
@@ -143,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Don't have an account? ",
+                  'Already have an account? ',
                   style: style.copyWith(fontSize: 14),
                 ),
                 InkWell(
@@ -154,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       height: 50,
                       child: Text(
-                        'Sign Up',
+                        'Login here',
                         style: style.copyWith(
                             fontSize: 14.5,
                             color: HexColor('#03a1fc'),

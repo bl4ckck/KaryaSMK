@@ -11,3 +11,8 @@ class InitialFetchCategoryEvent extends CategoryEvent {
   final String endpoint;
   InitialFetchCategoryEvent(this.endpoint);
 }
+
+class PushCategoryEvent extends CategoryEvent {
+  final String endpoint;
+  PushCategoryEvent(this.endpoint);
+}

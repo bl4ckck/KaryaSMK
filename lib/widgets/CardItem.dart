@@ -61,7 +61,7 @@ class CardItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 18),
                     child: Text(
-                      title,
+                      title + '\n',
                       maxLines: 2,
                       style: TextStyle(
                         wordSpacing: 3,

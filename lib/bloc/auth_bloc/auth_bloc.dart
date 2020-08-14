@@ -36,5 +36,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield AuthFailureState(msg: 'error');
       }
     }
+
+    if (event is AuthSwitchScreenEvent) {
+      yield AuthSwitchScreenLoadingState();
+
+      yield AuthSwitchedScreenState(screen: event.screen);
+    }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:karyasmk/screens/index_login_screen.dart';
+import 'package:karyasmk/screens/index_profile_screen.dart';
 import 'package:neumorphic/neumorphic.dart';
 
 class AppBarHome extends StatelessWidget {
@@ -41,7 +41,7 @@ class AppBarHome extends StatelessWidget {
                   Navigator.push(
                     context,
                     new MaterialPageRoute(
-                      builder: (context) => new IndexLoginScreen(),
+                      builder: (context) => new IndexProfileScreen(),
                     ),
                   );
                 },

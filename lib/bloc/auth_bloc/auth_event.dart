@@ -18,3 +18,8 @@ class SignIn extends AuthEvent {
 }
 
 class Register extends AuthEvent {}
+
+class AuthSwitchScreenEvent extends AuthEvent {
+  final String screen;
+  AuthSwitchScreenEvent({this.screen});
+}
