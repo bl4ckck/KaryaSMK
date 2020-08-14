@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:karyasmk/screens/latihan.dart';
+import 'package:karyasmk/screens/product_screen/index_sort_screen.dart';
 import 'package:neumorphic/neumorphic.dart';
 
 class MenuItem extends StatelessWidget {
@@ -21,7 +21,9 @@ class MenuItem extends StatelessWidget {
           Navigator.push(
             context,
             new MaterialPageRoute(
-              builder: (context) => new Latihan(),
+              builder: (context) => new IndexSortScreen(
+                endpoint: title,
+              ),
             ),
           );
         },

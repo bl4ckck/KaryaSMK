@@ -24,69 +24,9 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     ProductListEvent event,
   ) async* {
     final currentState = state;
-    //   if (event is FetchProudct) {
-    //     yield ProductListLoadingState();
-    //     try {
-    //       final List<ProductListModel> list =
-    //           await _productListRepo.getProductList();
-    //       yield ProductListStateLoaded(productList: list);
-    //     } catch (e) {
-    //       yield ProductListStateFailure(msg: e.toString());
-    //     }
-    //   }
-    // }
-    if (event is FetchProudct) {
-      yield* _fetchProductBaru(currentState);
-    }
+
     if (event is InitialFetchProductEvent) {
       yield* _initialEventToState(currentState);
-    }
-  }
-
-  Stream<ProductListState> _fetchProductBaru(
-      ProductListState currentState) async* {
-    // try {
-    //   if (currentState is FetchProudct) {
-    //     yield ProductListLoadingState();
-    //     List<ProductListModel> list = await _productListRepo.getProductList();
-    //     yield ProductListStateLoaded(productList: list);
-    //   }
-    //   if (currentState is ProductListStateLoaded) {
-    //     yield ProductListStateLoaded(productList: currentState.productList);
-    //   }
-    // } catch (e) {
-    //   yield ProductListStateFailure(msg: e.toString());
-    // }
-
-//FIX BISA
-    // try {
-    //   final List<ProductListModel> list =
-    //       await _productListRepo.getProductList();
-
-    //   yield ProductListLoadingState();
-    //   yield ProductListStateLoaded(productList: list);
-    // } catch (e) {
-    //   yield ProductListStateFailure(msg: e.toString());
-    // }
-
-    try {
-      if (currentState is InitialProductListState) {
-        yield ProductListLoadingState();
-        final List<ProductListModel> list =
-            await _productListRepo.getProductList();
-        yield ProductListStateLoaded(productList: list);
-      }
-      if (currentState is ProductListStateLoaded) {
-        final List<ProductListModel> list =
-            await _productListRepo.getProductList();
-        yield list.isEmpty
-            ? currentState.productList
-            : ProductListStateLoaded(
-                productList: currentState.productList + list,
-              );
-      }
-    } catch (e) {
-      yield ProductListStateFailure(msg: e.toString());
     }
   }
 

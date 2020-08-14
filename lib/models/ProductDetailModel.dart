@@ -13,11 +13,11 @@ class ProductDetailModel {
 }
 
 class GetDataDetail extends Equatable {
-  final String id_product, title, thumb, category, description;
+  final String idProduct, title, thumb, category, description;
   final num price, quantity;
 
   GetDataDetail(
-      {this.id_product,
+      {this.idProduct,
       this.title,
       this.thumb,
       this.category,
@@ -27,11 +27,11 @@ class GetDataDetail extends Equatable {
 
   @override
   List<Object> get props =>
-      [id_product, title, thumb, category, price, description, quantity];
+      [idProduct, title, thumb, category, price, description, quantity];
 
   factory GetDataDetail.fromMap(Map<String, dynamic> json) {
     return GetDataDetail(
-        id_product: json['id_product'],
+        idProduct: json['id_product'],
         title: json['title'],
         thumb: json['thumb'],
         category: json['category'],

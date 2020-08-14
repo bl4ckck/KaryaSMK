@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
+import 'package:karyasmk/bloc/category_bloc/category_bloc.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:karyasmk/helper/hive/session_user.dart';
 import 'package:karyasmk/repositories/auth_repository.dart';
@@ -37,6 +38,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProductDetailBloc>(
             create: (context) => ProductDetailBloc(ProductDetailRepo())),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc(AuthRepository())),
+        BlocProvider<CategoryBloc>(
+            create: (context) => CategoryBloc(ProductListRepo())),
       ],
       child: NeuApp(
         title: 'Karya SMK',

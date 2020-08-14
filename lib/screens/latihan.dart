@@ -25,7 +25,7 @@ class _LatihanState extends State<Latihan> {
         data: {"email": "pembeli@karyasmk.com", "password": "1karyasmk"});
 
     // if (response.statusCode == 200) {
-    var data = response.data;
+    // var data = response.data;
     // final List<AuthListModel> list = Auth.fromJson(data).authList;
 
     final jsonResponse = json.decode(response.toString());

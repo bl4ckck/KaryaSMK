@@ -1,28 +1,28 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:karyasmk/bloc/bloc.dart';
+import 'package:karyasmk/bloc/category_bloc/category_bloc.dart';
 import 'package:karyasmk/widgets/CardItem.dart';
 import 'package:karyasmk/widgets/LoadingBuilder.dart';
 
-class TerbaruList extends StatelessWidget {
+class CategoryList extends StatelessWidget {
   final double itemHeight;
   final double itemWidth;
 
-  const TerbaruList({Key key, this.itemHeight, this.itemWidth})
+  const CategoryList({Key key, this.itemHeight, this.itemWidth})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductListBloc, ProductListState>(
+    return BlocBuilder<CategoryBloc, CategoryState>(
       builder: (context, state) {
-        if (state is ProductListLoadingState) {
+        if (state is CategoryLoadingState) {
           return Padding(
             padding: const EdgeInsets.only(top: 18.0),
             child: LoadingBuilder(),
           );
-        } else if (state is ProductListStateLoaded) {
-          var mystate = state.productList;
+        } else if (state is CategoryStateLoaded) {
+          var mystate = state.categoryList;
 
           return Column(
             children: <Widget>[
@@ -50,7 +50,7 @@ class TerbaruList extends StatelessWidget {
               ),
             ],
           );
-        } else if (state is ProductListStateFailure) {
+        } else if (state is CategoryStateFailure) {
           return Center(child: Text('Failed to load data :('));
         }
         return Container();

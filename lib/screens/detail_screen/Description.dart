@@ -49,6 +49,7 @@ class _DescriptionState extends State<Description> {
           child: AutoSizeText(
             currencyFormat(widget.price),
             maxLines: 1,
+            textAlign: TextAlign.right,
             style: TextStyle(
               wordSpacing: 15,
               fontSize: 23,
