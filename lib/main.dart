@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/bloc/category_bloc/category_bloc.dart';
@@ -16,6 +17,10 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.blue,
+    statusBarColor: Colors.orange,
+  ));
 
   final directory = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(directory.path);
@@ -43,6 +48,7 @@ class MyApp extends StatelessWidget {
       ],
       child: NeuApp(
         title: 'Karya SMK',
+        debugShowCheckedModeBanner: false,
         theme: NeuThemeData(
           platform: TargetPlatform.android,
           primaryColor: Color.lerp(_color, Colors.black, 0.2),

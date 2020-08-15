@@ -27,9 +27,9 @@ class HeaderText extends StatelessWidget {
             ),
           ),
           Divider(
-            endIndent: (size.width / 2) + 50,
+            endIndent: (size.width / 2),
             thickness: 3,
-            color: HexColor('#f7a194'),
+            color: HexColor('#fa5d43'),
           ),
           Text(
             '$title',

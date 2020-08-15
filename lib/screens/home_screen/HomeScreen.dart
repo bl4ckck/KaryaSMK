@@ -43,11 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Container(
                       alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 10),
                       child: Text(
                         'All Products',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 18,
                             fontFamily: 'Montserrat-bold'),
                       )),
                   TerbaruList(

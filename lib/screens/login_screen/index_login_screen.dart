@@ -15,6 +15,11 @@ class IndexLoginScreen extends StatelessWidget {
         if (state.screen == 'register') {
           return RegisterScreen();
         }
+      } else if (state is AuthLoadedState) {
+        if (state.message != '' && state.page == 'register') {
+          return RegisterScreen(isError: state.message);
+        }
+        return LoginScreen(isError: state.message);
       }
       return LoginScreen();
     });

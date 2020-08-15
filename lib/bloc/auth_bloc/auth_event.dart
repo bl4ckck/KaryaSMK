@@ -17,7 +17,10 @@ class SignIn extends AuthEvent {
   SignIn({this.email, this.password});
 }
 
-class Register extends AuthEvent {}
+class Register extends AuthEvent {
+  final String email, password, nama, phone, type;
+  Register({this.email, this.password, this.nama, this.phone, this.type});
+}
 
 class AuthSwitchScreenEvent extends AuthEvent {
   final String screen;

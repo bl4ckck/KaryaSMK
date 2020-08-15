@@ -44,7 +44,40 @@ class AuthRepository {
       box.add(user);
 
       return data.user.type;
-    } else if (data.user.code == 'error') return 'general-error';
+    } else if (data.user.code == 'error') return data.user.message;
+
+    return 'general';
+  }
+
+  Future<String> register({
+    @required String email,
+    @required String password,
+    @required String nama,
+    @required String phone, //TODO: tambahin type
+  }) async {
+    Response response;
+    response = await dio.post('http://localhost:5000/api/v1/auth/register',
+        data: {
+          "email": email,
+          "password": password,
+          "nama": nama,
+          "phone": phone
+        });
+    //TODO: typenya jangan lupa yak
+
+    final jsonResponse = json.decode(response.toString());
+
+    Auth data = new Auth.fromJson(jsonResponse);
+
+    if (data.user.code == 'success') {
+      var user = SessionUser(
+          data.user.uid, data.user.email, data.user.nama, data.user.type);
+
+      final box = await Hive.openBox('sessionUser');
+      box.add(user);
+
+      return data.user.type;
+    } else if (data.user.code == 'error') return data.user.message;
 
     return 'general';
   }

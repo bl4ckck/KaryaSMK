@@ -27,13 +27,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
 
     if (event is SignIn) {
-      yield AuthLoadedState();
+      yield AuthlLoadingState();
       try {
         final userData =
             await _authRepo.login(email: event.email, password: event.password);
-        yield AuthLoadedState(role: userData);
-      } catch (_) {
-        yield AuthFailureState(msg: 'error');
+        yield AuthLoadedState(role: userData, message: userData); //Versi 2
+        // yield AuthLoadedState(role: userData); //Versi 1
+      } catch (e) {
+        yield AuthFailureState(msg: e.toString());
+      }
+    }
+
+    if (event is Register) {
+      yield AuthlLoadingState();
+      try {
+        final userData = await _authRepo.register(
+            email: event.email,
+            password: event.password,
+            nama: event.nama,
+            phone: event.phone);
+        yield AuthLoadedState(role: userData, message: userData, page: 'register');
+      } catch (e) {
+        yield AuthFailureState(msg: e.toString());
       }
     }
 

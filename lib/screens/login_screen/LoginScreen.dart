@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
-import 'package:karyasmk/widgets/LoadingBuilder.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key key}) : super(key: key);
+  const LoginScreen({Key key, this.isError}) : super(key: key);
+  final String isError;
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -14,16 +14,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   AuthBloc _authBloc;
   AuthBloc _switchScreen;
-  bool isLoading = false;
-  bool isError = false;
   String emailText;
   String passwordText;
 
   void doSignIn() async {
-    setState(() {
-      isLoading = true;
-    });
-
     _authBloc = BlocProvider.of<AuthBloc>(context);
     _authBloc.add(SignIn(email: emailText ?? '', password: passwordText ?? ''));
   }
@@ -99,14 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      setState(() {
-        isLoading = false;
-        isError = true;
-      });
-      return LoadingBuilder();
-    }
-
+    print(widget.isError);
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(36),
@@ -122,9 +109,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: 45.0),
-            (isError)
+            (widget.isError != '')
                 ? Text(
-                    'Email atau password Anda salah!',
+                    widget.isError ?? '',
                     style: TextStyle(color: Colors.red),
                   )
                 : SizedBox(height: 0.0),

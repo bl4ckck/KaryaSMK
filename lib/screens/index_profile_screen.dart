@@ -61,6 +61,7 @@ class _LoginScreenState extends State<IndexProfileScreen> {
             // else if (state.role == 'general' || state.role == null) {
             //   return IndexLoginScreen();
             // }
+            return IndexLoginScreen();
           } else if (state is AuthFailureState) {
             return IndexLoginScreen();
           }

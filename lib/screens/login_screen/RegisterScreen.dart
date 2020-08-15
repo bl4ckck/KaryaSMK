@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
-import 'package:karyasmk/widgets/LoadingBuilder.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key key}) : super(key: key);
+  const RegisterScreen({Key key, this.isError}) : super(key: key);
+  final String isError;
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -14,18 +14,18 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   AuthBloc _authBloc;
   AuthBloc _switchScreen;
-  bool isLoading = false;
-  bool isError = false;
   String emailText;
   String passwordText;
 
-  void doSignIn() async {
-    setState(() {
-      isLoading = true;
-    });
-
+  void doSignUp() async {
     _authBloc = BlocProvider.of<AuthBloc>(context);
-    _authBloc.add(SignIn(email: emailText ?? '', password: passwordText ?? ''));
+    _authBloc.add(Register(
+        email: 'penjual23@karyasmk.com',
+        password: 'emperorxz',
+        nama: 'Alvin',
+        phone: '81242588004',
+        type:
+            'student')); //TODO: ambil datanya dari text field, bikin validator juga
   }
 
   void switchScreen() async {
@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          doSignIn();
+          doSignUp();
         },
         child: Text("Sign Up",
             textAlign: TextAlign.center,
@@ -82,14 +82,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      setState(() {
-        isLoading = false;
-        isError = true;
-      });
-      return LoadingBuilder();
-    }
-
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(36),
@@ -105,9 +97,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             SizedBox(height: 45.0),
-            (isError)
+            (widget.isError != '')
                 ? Text(
-                    'Email atau password Anda salah!',
+                    widget.isError ?? '',
                     style: TextStyle(color: Colors.red),
                   )
                 : SizedBox(height: 0.0),

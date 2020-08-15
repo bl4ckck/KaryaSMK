@@ -12,12 +12,12 @@ class AuthInitial extends AuthState {}
 class AuthlLoadingState extends AuthState {}
 
 class AuthLoadedState extends AuthState {
-  final String role;
+  final String role, message, page;
 
-  AuthLoadedState({this.role});
+  AuthLoadedState({this.role, this.message, this.page});
 
   @override
-  List<Object> get props => [role];
+  List<Object> get props => [role, message, page];
 }
 
 class AuthFailureState extends AuthState {
