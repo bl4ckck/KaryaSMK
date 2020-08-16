@@ -45,7 +45,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: event.email,
             password: event.password,
             nama: event.nama,
-            phone: event.phone);
+            phone: event.phone,
+            type: event.type);
         yield AuthLoadedState(role: userData, message: userData, page: 'register');
       } catch (e) {
         yield AuthFailureState(msg: e.toString());

@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 
-class AuthSellerScreen extends StatefulWidget {
-  const AuthSellerScreen({Key key}) : super(key: key);
+class BuyerScreen extends StatefulWidget {
+  const BuyerScreen({Key key}) : super(key: key);
 
   @override
-  _AuthSellerScreenState createState() => _AuthSellerScreenState();
+  _BuyerSellerScreenState createState() => _BuyerSellerScreenState();
 }
 
-class _AuthSellerScreenState extends State<AuthSellerScreen> {
+class _BuyerSellerScreenState extends State<BuyerScreen> {
   AuthBloc _authBloc;
 
   @override
@@ -40,7 +40,7 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
     return Column(
       children: <Widget>[
         Text(
-          'Ini Auth Seller Screen',
+          'Ini Buyer Screen',
           style: TextStyle(fontSize: 50),
         ),
         InkWell(

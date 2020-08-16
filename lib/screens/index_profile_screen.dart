@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
+import 'package:karyasmk/screens/buyer_screen/BuyerScreen.dart';
 import 'package:karyasmk/screens/login_screen/index_login_screen.dart';
 import 'package:karyasmk/screens/seller_screen/AuthSellerScreen.dart';
 import 'package:karyasmk/widgets/LoadingBuilder.dart';
@@ -57,10 +58,9 @@ class _LoginScreenState extends State<IndexProfileScreen> {
           } else if (state is AuthLoadedState) {
             if (state.role == 'student') {
               return AuthSellerScreen();
+            } else if (state.role == 'buyer') {
+              return BuyerScreen();
             }
-            // else if (state.role == 'general' || state.role == null) {
-            //   return IndexLoginScreen();
-            // }
             return IndexLoginScreen();
           } else if (state is AuthFailureState) {
             return IndexLoginScreen();

@@ -53,17 +53,18 @@ class AuthRepository {
     @required String email,
     @required String password,
     @required String nama,
-    @required String phone, //TODO: tambahin type
+    @required String phone,
+    @required String type
   }) async {
     Response response;
-    response = await dio.post('http://localhost:5000/api/v1/auth/register',
-        data: {
-          "email": email,
-          "password": password,
-          "nama": nama,
-          "phone": phone
-        });
-    //TODO: typenya jangan lupa yak
+    response =
+        await dio.post('http://localhost:5000/api/v1/auth/register', data: {
+      "email": email,
+      "password": password,
+      "nama": nama,
+      "phone": phone,
+      "type": type,
+    });
 
     final jsonResponse = json.decode(response.toString());
 
