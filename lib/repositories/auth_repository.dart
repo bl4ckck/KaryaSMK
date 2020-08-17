@@ -37,8 +37,8 @@ class AuthRepository {
     Auth data = new Auth.fromJson(jsonResponse);
 
     if (data.user.code == 'success') {
-      var user = SessionUser(
-          data.user.uid, data.user.email, data.user.nama, data.user.type);
+      var user = SessionUser(data.user.uid, data.user.email, data.user.nama,
+          data.user.phone, data.user.type);
 
       final box = await Hive.openBox('sessionUser');
       box.add(user);
@@ -49,13 +49,12 @@ class AuthRepository {
     return 'general';
   }
 
-  Future<String> register({
-    @required String email,
-    @required String password,
-    @required String nama,
-    @required String phone,
-    @required String type
-  }) async {
+  Future<String> register(
+      {@required String email,
+      @required String password,
+      @required String nama,
+      @required String phone,
+      @required String type}) async {
     Response response;
     response =
         await dio.post('http://localhost:5000/api/v1/auth/register', data: {
@@ -71,8 +70,8 @@ class AuthRepository {
     Auth data = new Auth.fromJson(jsonResponse);
 
     if (data.user.code == 'success') {
-      var user = SessionUser(
-          data.user.uid, data.user.email, data.user.nama, data.user.type);
+      var user = SessionUser(data.user.uid, data.user.email, data.user.nama,
+          data.user.phone, data.user.type);
 
       final box = await Hive.openBox('sessionUser');
       box.add(user);

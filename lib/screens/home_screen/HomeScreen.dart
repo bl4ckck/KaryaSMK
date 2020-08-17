@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:karyasmk/bloc/bloc.dart';
+import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:neumorphic/neumorphic.dart';
 import 'home_screen.dart';
 

@@ -57,30 +57,39 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+    if (data.isNotEmpty) {
+      return Scaffold(
+          backgroundColor: NeuTheme.of(context).backgroundColor,
+          appBar: customAppBar(context),
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(bottom: 18.0),
+            child: FloatingActionButton.extended(
+              elevation: 4.0,
+              backgroundColor: HexColor('#ffa451'),
+              label: Text('Pesan Sekarang'),
+              onPressed: () {},
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          body: SingleChildScrollView(
+              child: Container(
+                  child: Column(
+            children: <Widget>[
+              HeaderText(title: data[0].title, size: size),
+              DisplayImage(url: data[0].thumb, size: size),
+              Description(
+                  desc: data[0].description,
+                  qty: data[0].quantity,
+                  price: data[0].price)
+            ],
+          ))));
+    }
     return Scaffold(
         backgroundColor: NeuTheme.of(context).backgroundColor,
         appBar: customAppBar(context),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(bottom: 18.0),
-          child: FloatingActionButton.extended(
-            elevation: 4.0,
-            backgroundColor: HexColor('#ffa451'),
-            label: Text('Pesan Sekarang'),
-            onPressed: () {},
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        body: SingleChildScrollView(
-            child: Container(
-                child: Column(
-          children: <Widget>[
-            HeaderText(title: data[0].title, size: size),
-            DisplayImage(url: data[0].thumb, size: size),
-            Description(
-                desc: data[0].description,
-                qty: data[0].quantity,
-                price: data[0].price)
-          ],
-        ))));
+        body: Center(
+          child: Text('Data Not Found :('),
+        ));
   }
 }

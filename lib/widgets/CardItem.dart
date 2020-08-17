@@ -43,12 +43,15 @@ class CardItem extends StatelessWidget {
         },
         child: Column(
           children: <Widget>[
-            CachedNetworkImage(
-              imageUrl: image,
-              fit: BoxFit.cover,
-              placeholder: (context, url) =>
-                  Center(child: Image.asset('assets/images/placeholder.jpg')),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+            Container(
+              height: 135,
+              child: CachedNetworkImage(
+                imageUrl: image,
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    Center(child: Image.asset('assets/images/placeholder.jpg')),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

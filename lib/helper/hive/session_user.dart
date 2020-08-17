@@ -13,7 +13,10 @@ class SessionUser extends HiveObject {
   String nama;
 
   @HiveField(3)
+  String phone;
+
+  @HiveField(4)
   String type;
 
-  SessionUser(this.uid, this.email, this.nama, this.type);
+  SessionUser(this.uid, this.email, this.nama, this.phone, this.type);
 }

@@ -21,13 +21,14 @@ class SessionUserAdapter extends TypeAdapter<SessionUser> {
       fields[1] as String,
       fields[2] as String,
       fields[3] as String,
+      fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, SessionUser obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.uid)
       ..writeByte(1)
@@ -35,6 +36,8 @@ class SessionUserAdapter extends TypeAdapter<SessionUser> {
       ..writeByte(2)
       ..write(obj.nama)
       ..writeByte(3)
+      ..write(obj.phone)
+      ..writeByte(4)
       ..write(obj.type);
   }
 

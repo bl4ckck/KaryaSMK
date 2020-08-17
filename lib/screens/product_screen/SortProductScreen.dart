@@ -36,9 +36,11 @@ class SortProductScreen extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(context),
       backgroundColor: NeuTheme.of(context).backgroundColor,
-      body: CategoryList(
-        itemHeight: itemHeight,
-        itemWidth: itemWidth,
+      body: SingleChildScrollView(
+        child: CategoryList(
+          itemHeight: itemHeight,
+          itemWidth: itemWidth,
+        ),
       ),
     );
   }

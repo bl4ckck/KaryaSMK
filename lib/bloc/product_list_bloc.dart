@@ -28,6 +28,30 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     if (event is InitialFetchProductEvent) {
       yield* _initialEventToState(currentState);
     }
+
+    if (event is PostProduct) {
+      yield ProductAddLoadingState();
+
+      try {
+        final bool isPosted = await _productListRepo.postProductRepo(
+            category: event.category,
+            description: event.description,
+            file: event.file,
+            price: event.price,
+            quantity: event.quantity,
+            title: event.title,
+            uid: event.uid);
+
+        // if (isPosted) {
+        yield ProductAddStatusState(msg: 'success');
+        final List<ProductListModel> list =
+            await _productListRepo.getProductList();
+        yield ProductListStateLoaded(productList: list);
+        // }
+      } catch (_) {
+        yield ProductAddStatusState(msg: 'failed');
+      }
+    }
   }
 
   Stream<ProductListState> _initialEventToState(

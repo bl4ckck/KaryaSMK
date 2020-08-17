@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:karyasmk/constants/base_url.dart';
 import 'package:karyasmk/models/Category.dart';
@@ -31,5 +33,36 @@ class ProductListRepo {
       return categorylist;
     }
     return null;
+  }
+
+  Future<bool> postProductRepo({
+    String uid,
+    title,
+    description,
+    category,
+    File file,
+    num quantity,
+    price,
+  }) async {
+    String fileName = file.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "uid": uid,
+      "title": title,
+      "quantity": quantity,
+      "price": price,
+      "description": description,
+      "category": category,
+      "file":
+          await MultipartFile.fromFile(file.path.toString(), filename: fileName)
+    });
+    await dio
+        .post('http://localhost:5000/api/v1/products', data: formData)
+        .then((_) {
+      return true;
+    }).catchError((_) {
+      return false;
+    });
+
+    return false;
   }
 }

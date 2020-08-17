@@ -31,3 +31,14 @@ class ProductListStateFailure extends ProductListState {
   @override
   List<Object> get props => [msg];
 }
+
+class ProductAddLoadingState extends ProductListState {}
+
+class ProductAddStatusState extends ProductListState {
+  final String msg;
+
+  ProductAddStatusState({this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}
