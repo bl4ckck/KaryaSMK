@@ -7,10 +7,16 @@ import 'package:karyasmk/widgets/LoadingBuilder.dart';
 import 'package:neumorphic/neumorphic.dart';
 
 class IndexAddProduct extends StatelessWidget {
-  const IndexAddProduct({Key key}) : super(key: key);
-
+  const IndexAddProduct({Key key, @required this.uid}) : super(key: key);
+  final String uid;
+//TODO: tambahin toast error
   Widget customAppBar(BuildContext ctx) {
     return AppBar(
+      title: Text(
+        'Add Product',
+        style: TextStyle(color: Colors.black),
+      ),
+      centerTitle: true,
       backgroundColor: NeuTheme.of(ctx).backgroundColor,
       elevation: 0,
       leading: IconButton(
@@ -36,7 +42,7 @@ class IndexAddProduct extends StatelessWidget {
         } else if (state is ProductAddStatusState) {
           return SuccessScreen();
         }
-        return AddProduct();
+        return AddProduct(uid: uid);
       }),
     );
   }

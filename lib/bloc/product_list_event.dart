@@ -16,7 +16,7 @@ class InitialFetchProductEvent extends ProductListEvent {}
 class PostProduct extends ProductListEvent {
   final String uid, title, description, category;
   final File file;
-  final num quantity, price;
+  final String quantity, price;
 
   PostProduct({
     @required this.uid,

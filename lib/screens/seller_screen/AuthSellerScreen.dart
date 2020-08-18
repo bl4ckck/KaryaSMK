@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
-import 'package:karyasmk/screens/seller_screen/AddProduct.dart';
+import 'package:karyasmk/bloc/seller_product_bloc/seller_product_bloc.dart';
+import 'package:karyasmk/screens/seller_screen/MyProduct.dart';
 import 'package:karyasmk/screens/seller_screen/index_add_product.dart';
 import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:karyasmk/widgets/ProfileInfo.dart';
@@ -17,10 +18,12 @@ class AuthSellerScreen extends StatefulWidget {
 
 class _AuthSellerScreenState extends State<AuthSellerScreen> {
   AuthBloc _authBloc;
+  SellerProductBloc _productBloc;
   String email = '';
   String nama = '';
   String type = '';
   String phone = '';
+  String uid = '';
 
   @override
   void initState() {
@@ -32,16 +35,21 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
     final box = await Hive.openBox('sessionUser');
 
     setState(() {
+      uid = box.getAt(0).uid ?? '';
       email = box.getAt(0).email ?? '';
       nama = box.getAt(0).nama ?? '';
       type = box.getAt(0).type ?? '';
       phone = box.getAt(0).phone ?? '';
     });
+
+    _productBloc = BlocProvider.of<SellerProductBloc>(context);
+    _productBloc.add(FetchSellerProductEvent(uid));
   }
 
   void signOut() async {
     final box = await Hive.openBox('sessionUser');
     setState(() {
+      uid = '';
       email = '';
       nama = '';
       type = '';
@@ -79,6 +87,11 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
+    final double itemHeight = ((size.height - kToolbarHeight - 24) / 2) + 50;
+    final double itemWidth = size.width / 2;
+
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.only(left: 16, right: 16),
@@ -107,7 +120,7 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
                       Navigator.push(
                         context,
                         new MaterialPageRoute(
-                          builder: (context) => new IndexAddProduct(),
+                          builder: (context) => new IndexAddProduct(uid: uid),
                         ),
                       );
                     },
@@ -122,6 +135,10 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
                 ],
               ),
             ),
+            MyProduct(
+              itemHeight: itemHeight,
+              itemWidth: itemWidth,
+            )
           ],
         ),
       ),

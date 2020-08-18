@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:karyasmk/constants/base_url.dart';
 import 'package:karyasmk/models/Category.dart';
+import 'package:karyasmk/models/SellerProduct.dart';
 import 'package:karyasmk/models/models.dart';
 
 class ProductListRepo {
@@ -17,6 +18,20 @@ class ProductListRepo {
       final List<ProductListModel> list = Product.fromJson(data).productList;
 
       return list;
+    }
+    return null;
+  }
+
+  Future<List<SellerProductModel>> getProductBySeller(String endpoint) async {
+    Response response;
+    response = await dio.get(BaseUrl + 'products/seller/' + endpoint);
+
+    if (response.statusCode == 200) {
+      var data = response.data;
+      final List<SellerProductModel> sellerProductList =
+          SellerProduct.fromJson(data).sellerProductList;
+
+      return sellerProductList;
     }
     return null;
   }
@@ -41,7 +56,7 @@ class ProductListRepo {
     description,
     category,
     File file,
-    num quantity,
+    String quantity,
     price,
   }) async {
     String fileName = file.path.split('/').last;

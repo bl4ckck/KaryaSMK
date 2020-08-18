@@ -36,7 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
       style: style,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
+          labelText: "Email",
+          hintText: "Enter Email Address...",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
     );
   }
@@ -48,7 +49,8 @@ class _LoginScreenState extends State<LoginScreen> {
       style: style,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Password",
+          labelText: "Password",
+          hintText: "Enter Password...",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:karyasmk/widgets/HexColor.dart';
 import 'package:neumorphic/neumorphic.dart';
 
 class ProfileInfo extends StatelessWidget {

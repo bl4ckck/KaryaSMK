@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
+import 'package:karyasmk/bloc/seller_product_bloc/seller_product_bloc.dart';
 import 'package:karyasmk/screens/buyer_screen/BuyerScreen.dart';
 import 'package:karyasmk/screens/login_screen/index_login_screen.dart';
 import 'package:karyasmk/screens/seller_screen/AuthSellerScreen.dart';
@@ -18,6 +19,7 @@ class IndexProfileScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<IndexProfileScreen> {
   AuthBloc _authBloc;
+  SellerProductBloc _sellerProductBloc;
 
   @override
   void initState() {
@@ -30,6 +32,9 @@ class _LoginScreenState extends State<IndexProfileScreen> {
 
     _authBloc = BlocProvider.of<AuthBloc>(context);
     _authBloc.add(FetchSession(box.isNotEmpty ? box.getAt(0).type : 'general'));
+
+    _sellerProductBloc = BlocProvider.of<SellerProductBloc>(context);
+    _sellerProductBloc.add(FetchSellerProductEvent(''));
   }
 
   Widget customAppBar(BuildContext ctx) {

@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/bloc/category_bloc/category_bloc.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:karyasmk/bloc/seller_product_bloc/seller_product_bloc.dart';
 import 'package:karyasmk/helper/hive/session_user.dart';
 import 'package:karyasmk/repositories/auth_repository.dart';
 import 'package:karyasmk/repositories/product_detail_repo.dart';
@@ -45,6 +46,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthBloc>(create: (context) => AuthBloc(AuthRepository())),
         BlocProvider<CategoryBloc>(
             create: (context) => CategoryBloc(ProductListRepo())),
+        BlocProvider<SellerProductBloc>(
+            create: (context) => SellerProductBloc(ProductListRepo())),
       ],
       child: NeuApp(
         title: 'Karya SMK',

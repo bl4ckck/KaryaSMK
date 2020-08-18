@@ -23,6 +23,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 15.0);
+
   void doSignUp() async {
     _authBloc = BlocProvider.of<AuthBloc>(context);
     _authBloc.add(Register(
@@ -54,8 +56,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
   }
 
-  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 15.0);
-
   bool formatEmail(String email) {
     bool emailValid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -79,7 +79,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          hintText: "Email",
+          labelText: 'Email',
+          hintText: "Enter Email Address...",
           isDense: true,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
     );
@@ -101,7 +102,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           isDense: true,
-          hintText: "Password",
+          labelText: 'Password',
+          hintText: "Enter Password...",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
     );
   }
@@ -119,7 +121,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           isDense: true,
-          hintText: "Full Name",
+          labelText: 'Full Name',
+          hintText: "Enter Full Name...",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
     );
   }
@@ -157,7 +160,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   isDense: true,
-                  hintText: "Number Phone",
+                  labelText: 'Number Phone',
+                  hintText: "Enter Number Phone...",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0))),
             ),

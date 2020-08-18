@@ -44,6 +44,7 @@ dependencies:
   hive: ^1.4.3
   flutter_spinkit: ^4.1.2+1
   image_picker: ^0.6.7+4
+  fluttertoast: ^7.0.2
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.5
