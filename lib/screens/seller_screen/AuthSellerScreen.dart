@@ -85,6 +85,11 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
     );
   }
 
+  void refresh() async {
+    _productBloc = BlocProvider.of<SellerProductBloc>(context);
+    _productBloc.add(FetchSellerProductEvent(uid));
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -92,54 +97,67 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
     final double itemHeight = ((size.height - kToolbarHeight - 24) / 2) + 50;
     final double itemWidth = size.width / 2;
 
-    return SingleChildScrollView(
-      child: Container(
-        margin: EdgeInsets.only(left: 16, right: 16),
-        child: Column(
-          children: <Widget>[
-            Stack(
-              alignment: Alignment.bottomCenter,
-              children: <Widget>[
-                ProfileInfo(email: email, nama: nama, phone: phone, type: type),
-                signOutButton(context),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 18.0, bottom: 18),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.refresh,
+          size: 30,
+        ),
+        onPressed: () {
+          refresh();
+        },
+      ),
+      backgroundColor: NeuTheme.of(context).backgroundColor,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(left: 16, right: 16),
+          child: Column(
+            children: <Widget>[
+              Stack(
+                alignment: Alignment.bottomCenter,
                 children: <Widget>[
-                  Text(
-                    'My Products',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  FloatingActionButton(
-                    heroTag: null,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                          builder: (context) => new IndexAddProduct(uid: uid),
-                        ),
-                      );
-                    },
-                    elevation: 2,
-                    tooltip: 'Add Item',
-                    foregroundColor: HexColor('#ef8d31'),
-                    child: Icon(
-                      Icons.add,
-                    ),
-                    backgroundColor: NeuTheme.of(context).backgroundColor,
-                  ),
+                  ProfileInfo(
+                      email: email, nama: nama, phone: phone, type: type),
+                  signOutButton(context),
                 ],
               ),
-            ),
-            MyProduct(
-              itemHeight: itemHeight,
-              itemWidth: itemWidth,
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 18.0, bottom: 18),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'My Products',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    FloatingActionButton(
+                      heroTag: null,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                            builder: (context) => new IndexAddProduct(uid: uid),
+                          ),
+                        );
+                      },
+                      elevation: 2,
+                      tooltip: 'Add Item',
+                      foregroundColor: HexColor('#ef8d31'),
+                      child: Icon(
+                        Icons.add,
+                      ),
+                      backgroundColor: NeuTheme.of(context).backgroundColor,
+                    ),
+                  ],
+                ),
+              ),
+              MyProduct(
+                itemHeight: itemHeight,
+                itemWidth: itemWidth,
+              )
+            ],
+          ),
         ),
       ),
     );

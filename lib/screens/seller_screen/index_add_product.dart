@@ -40,7 +40,7 @@ class IndexAddProduct extends StatelessWidget {
         if (state is ProductAddLoadingState) {
           return LoadingBuilder();
         } else if (state is ProductAddStatusState) {
-          return SuccessScreen();
+          return SuccessScreen(); //TODO: benerin UI successnya
         }
         return AddProduct(uid: uid);
       }),

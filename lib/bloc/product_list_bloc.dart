@@ -29,11 +29,23 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       yield* _initialEventToState(currentState);
     }
 
+    if (event is FetchProductEvent) {
+      yield ProductAddLoadingState();
+
+      try {
+        final List<ProductListModel> list =
+            await _productListRepo.getProductList();
+        yield ProductListStateLoaded(productList: list);
+      } catch (e) {
+        yield ProductListStateFailure(msg: e);
+      }
+    }
+
     if (event is PostProduct) {
       yield ProductAddLoadingState();
 
       try {
-        await _productListRepo.postProductRepo(
+        final post = await _productListRepo.postProductRepo(
             category: event.category,
             description: event.description,
             file: event.file,

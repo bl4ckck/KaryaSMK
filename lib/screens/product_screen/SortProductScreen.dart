@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:karyasmk/bloc/category_bloc/category_bloc.dart';
 import 'package:karyasmk/widgets/CategoryList.dart';
 import 'package:neumorphic/neumorphic.dart';
 
-class SortProductScreen extends StatelessWidget {
+class SortProductScreen extends StatefulWidget {
   final String title;
   const SortProductScreen({Key key, @required this.title}) : super(key: key);
 
+  @override
+  _SortProductScreenState createState() => _SortProductScreenState();
+}
+
+class _SortProductScreenState extends State<SortProductScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -13,34 +20,10 @@ class SortProductScreen extends StatelessWidget {
     final double itemHeight = ((size.height - kToolbarHeight - 24) / 2) + 50;
     final double itemWidth = size.width / 2;
 
-    Widget customAppBar(BuildContext ctx) {
-      return AppBar(
-        centerTitle: true,
-        title: Text(
-          title,
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: NeuTheme.of(ctx).backgroundColor,
-        elevation: 0,
-        leading: IconButton(
-          iconSize: 27,
-          color: Colors.black,
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(ctx, true);
-          },
-        ),
-      );
-    }
-
-    return Scaffold(
-      appBar: customAppBar(context),
-      backgroundColor: NeuTheme.of(context).backgroundColor,
-      body: SingleChildScrollView(
-        child: CategoryList(
-          itemHeight: itemHeight,
-          itemWidth: itemWidth,
-        ),
+    return SingleChildScrollView(
+      child: CategoryList(
+        itemHeight: itemHeight,
+        itemWidth: itemWidth,
       ),
     );
   }

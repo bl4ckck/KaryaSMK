@@ -31,16 +31,13 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     }
 
     if (event is PushCategoryEvent) {
-      if (currentState is CategoryStateLoaded) {
+      yield CategoryLoadingState();
+      try {
         final List<CategoryModel> categoryList =
             await _categoryRepo.getProductByCategory(event.endpoint);
-
-        if (currentState.categoryList != categoryList) {
-          yield CategoryStateLoaded(categoryList: []);
-          yield CategoryStateLoaded(categoryList: categoryList);
-        } else {
-          yield CategoryStateLoaded(categoryList: currentState.categoryList);
-        }
+        yield CategoryStateLoaded(categoryList: categoryList);
+      } catch (e) {
+        yield CategoryStateFailure(msg: e.toString());
       }
     }
   }

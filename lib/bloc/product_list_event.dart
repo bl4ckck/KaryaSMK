@@ -13,6 +13,8 @@ abstract class ProductListEvent extends Equatable {
 
 class InitialFetchProductEvent extends ProductListEvent {}
 
+class FetchProductEvent extends ProductListEvent {}
+
 class PostProduct extends ProductListEvent {
   final String uid, title, description, category;
   final File file;

@@ -28,6 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: NeuTheme.of(context).backgroundColor,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.refresh,
+          size: 30,
+        ),
+        onPressed: () {
+          refresh();
+        },
+      ),
       body: SingleChildScrollView(
         child: DefaultTextStyle(
           style: TextStyle(fontFamily: 'Montserrat', color: Colors.black),
@@ -65,5 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void init() {
     _productListBloc = BlocProvider.of<ProductListBloc>(context);
     _productListBloc.add(InitialFetchProductEvent());
+  }
+
+  void refresh() async {
+    _productListBloc = BlocProvider.of<ProductListBloc>(context);
+    _productListBloc.add(FetchProductEvent());
   }
 }
