@@ -13,11 +13,6 @@ class ProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
-    final double itemHeight = ((size.height - kToolbarHeight - 24) / 2) + 50;
-    final double itemWidth = size.width;
-
     return DefaultTextStyle(
       style: TextStyle(fontFamily: 'Montserrat', color: Colors.black),
       child: Container(

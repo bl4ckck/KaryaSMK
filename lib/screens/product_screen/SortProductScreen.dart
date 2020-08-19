@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:karyasmk/bloc/category_bloc/category_bloc.dart';
 import 'package:karyasmk/widgets/CategoryList.dart';
-import 'package:neumorphic/neumorphic.dart';
 
 class SortProductScreen extends StatefulWidget {
   final String title;

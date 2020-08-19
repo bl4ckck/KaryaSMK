@@ -17,8 +17,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   Stream<CategoryState> mapEventToState(
     CategoryEvent event,
   ) async* {
-    final currentState = state;
-
     if (event is InitialFetchCategoryEvent) {
       try {
         yield CategoryLoadingState();

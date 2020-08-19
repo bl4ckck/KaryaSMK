@@ -70,9 +70,7 @@ class ProductListRepo {
       "file":
           await MultipartFile.fromFile(file.path.toString(), filename: fileName)
     });
-    await dio
-        .post('http://localhost:5000/api/v1/products', data: formData)
-        .then((_) {
+    await dio.post(BaseUrl + 'products', data: formData).then((_) {
       return true;
     }).catchError((_) {
       return false;

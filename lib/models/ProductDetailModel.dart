@@ -13,30 +13,34 @@ class ProductDetailModel {
 }
 
 class GetDataDetail extends Equatable {
-  final String idProduct, title, thumb, category, description;
+  final String idProduct, title, thumb, category, description, uid;
   final num price, quantity;
 
-  GetDataDetail(
-      {this.idProduct,
-      this.title,
-      this.thumb,
-      this.category,
-      this.price,
-      this.description,
-      this.quantity});
+  GetDataDetail({
+    this.idProduct,
+    this.title,
+    this.thumb,
+    this.category,
+    this.price,
+    this.description,
+    this.quantity,
+    this.uid,
+  });
 
   @override
   List<Object> get props =>
-      [idProduct, title, thumb, category, price, description, quantity];
+      [idProduct, title, thumb, category, price, description, quantity, uid];
 
   factory GetDataDetail.fromMap(Map<String, dynamic> json) {
     return GetDataDetail(
-        idProduct: json['id_product'],
-        title: json['title'],
-        thumb: json['thumb'],
-        category: json['category'],
-        price: json['price'],
-        description: json['description'],
-        quantity: json['quantity']);
+      idProduct: json['id_product'],
+      title: json['title'],
+      thumb: json['thumb'],
+      category: json['category'],
+      price: json['price'],
+      description: json['description'],
+      quantity: json['quantity'],
+      uid: json['uid'],
+    );
   }
 }
