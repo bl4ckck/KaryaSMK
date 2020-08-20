@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/bloc/category_bloc/category_bloc.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:karyasmk/bloc/school_bloc/school_bloc.dart';
 import 'package:karyasmk/bloc/seller_product_bloc/seller_product_bloc.dart';
 import 'package:karyasmk/bloc/transaction_bloc/transaction_bloc.dart';
 import 'package:karyasmk/helper/hive/session_user.dart';
@@ -27,7 +28,6 @@ void main() async {
 
   final directory = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(directory.path);
-  Hive.openBox('session');
   Hive.openBox('sessionUser');
   Hive.registerAdapter(SessionUserAdapter());
 
@@ -52,6 +52,8 @@ class MyApp extends StatelessWidget {
             create: (context) => SellerProductBloc(ProductListRepo())),
         BlocProvider<TransactionBloc>(
             create: (context) => TransactionBloc(TransactionRepo())),
+        BlocProvider<SchoolBloc>(
+            create: (context) => SchoolBloc(ProductListRepo())),
       ],
       child: NeuApp(
         title: 'Karya SMK',

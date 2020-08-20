@@ -27,5 +27,26 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         yield ProductDetailFailureState(msg: e.toString());
       }
     }
+    if (event is ViewDeleteProductDetail) {
+      yield ViewDeleteProductDetailLoadingState();
+      try {
+        final List<GetDataDetail> data =
+            await _detailRepo.getProduct(event.endpoint);
+        yield ViewDeleteProductDetailLoadedState(data: data);
+      } catch (e) {
+        yield ViewDeleteProductDetailFailureState(msg: e.toString());
+      }
+    }
+    if (event is DeleteProductDetail) {
+      yield ViewDeleteProductDetailLoadingState();
+      try {
+        final bool isDeleted = await _detailRepo.deleteProduct(event.endpoint);
+        final List<GetDataDetail> data =
+            await _detailRepo.getProduct(event.endpoint);
+        yield ViewDeleteProductDetailLoadedState(data: data);
+      } catch (e) {
+        yield ViewDeleteProductDetailFailureState(msg: e.toString());
+      }
+    }
   }
 }

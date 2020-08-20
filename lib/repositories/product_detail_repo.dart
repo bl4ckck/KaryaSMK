@@ -18,4 +18,14 @@ class ProductDetailRepo {
     }
     return null;
   }
+
+  Future<bool> deleteProduct(String idProduct) async {
+    await dio.delete(BaseUrl + 'products/' + idProduct).then((_) {
+      return true;
+    }).catchError((_) {
+      return false;
+    });
+
+    return false;
+  }
 }

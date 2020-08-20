@@ -1,27 +1,28 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:karyasmk/bloc/seller_product_bloc/seller_product_bloc.dart';
+import 'package:karyasmk/bloc/school_bloc/school_bloc.dart';
 import 'package:karyasmk/widgets/CardDeleteItem.dart';
 import 'package:karyasmk/widgets/LoadingBuilder.dart';
 
-class MyProduct extends StatelessWidget {
+class SchoolProduct extends StatelessWidget {
   final double itemHeight;
   final double itemWidth;
 
-  const MyProduct({Key key, this.itemHeight, this.itemWidth}) : super(key: key);
+  const SchoolProduct({Key key, this.itemHeight, this.itemWidth})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SellerProductBloc, SellerProductState>(
+    return BlocBuilder<SchoolBloc, SchoolState>(
       builder: (context, state) {
-        if (state is SellerProductLoadingState) {
+        if (state is SchoolLoadingState) {
           return Padding(
             padding: const EdgeInsets.only(top: 18.0),
             child: LoadingBuilder(),
           );
-        } else if (state is SellerProductLoadedState) {
-          var mystate = state.sellerProduct;
+        } else if (state is SchoolStateLoaded) {
+          var mystate = state.schoolProduct;
 
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -45,7 +46,7 @@ class MyProduct extends StatelessWidget {
               );
             },
           );
-        } else if (state is SellerProductFailurState) {
+        } else if (state is SchoolStateFailure) {
           return Center(child: Text('Failed to load data :('));
         }
         return Container();

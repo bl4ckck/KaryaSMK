@@ -30,6 +30,17 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
         yield TransactionFailurState(msg: e);
       }
     }
+    if (event is SellerFetchTransactionEvent) {
+      yield TransactionLoadingState();
+
+      try {
+        final List<TransactionModel> transaction =
+            await _transactionRepo.getTransactionBySeller(event.endpoint);
+        yield TransactionLoadedState(transaction: transaction);
+      } catch (e) {
+        yield TransactionFailurState(msg: e);
+      }
+    }
     if (event is PostTransaction) {
       yield TransactionAddLoadingState();
 

@@ -11,3 +11,13 @@ class FetchProductDetail extends ProductDetailEvent {
   final String endpoint;
   FetchProductDetail(this.endpoint);
 }
+
+class ViewDeleteProductDetail extends ProductDetailEvent {
+  final String endpoint;
+  ViewDeleteProductDetail(this.endpoint);
+}
+
+class DeleteProductDetail extends ProductDetailEvent {
+  final String endpoint;
+  DeleteProductDetail(this.endpoint);
+}

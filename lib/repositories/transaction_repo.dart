@@ -19,6 +19,20 @@ class TransactionRepo {
     return null;
   }
 
+  Future<List<TransactionModel>> getTransactionBySeller(String endpoint) async {
+    Response response;
+    response = await dio.get(BaseUrl + 'transaction/seller/' + endpoint);
+
+    if (response.statusCode == 200) {
+      var data = response.data;
+      final List<TransactionModel> transactionList =
+          Transaction.fromJson(data).transactionList;
+
+      return transactionList;
+    }
+    return null;
+  }
+
   Future<bool> postTransactionRepo(
       {String idProduct,
       title,

@@ -28,3 +28,36 @@ class ProductDetailFailureState extends ProductDetailState {
   @override
   List<Object> get props => [msg];
 }
+
+class ViewDeleteProductDetailInitial extends ProductDetailState {}
+
+class ViewDeleteProductDetailLoadingState extends ProductDetailState {}
+
+class ViewDeleteProductDetailLoadedState extends ProductDetailState {
+  final List<GetDataDetail> data;
+
+  ViewDeleteProductDetailLoadedState({this.data});
+
+  @override
+  List<Object> get props => [data];
+}
+
+class ViewDeleteProductDetailFailureState extends ProductDetailState {
+  final String msg;
+
+  ViewDeleteProductDetailFailureState({this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}
+
+class DeleteProductDetailLoadingState extends ProductDetailState {}
+
+class DeleteProductDetailLoadedState extends ProductDetailState {
+  final List<GetDataDetail> data;
+
+  DeleteProductDetailLoadedState({this.data});
+
+  @override
+  List<Object> get props => [data];
+}

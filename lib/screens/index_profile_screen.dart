@@ -6,6 +6,7 @@ import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
 import 'package:karyasmk/bloc/seller_product_bloc/seller_product_bloc.dart';
 import 'package:karyasmk/screens/buyer_screen/BuyerScreen.dart';
 import 'package:karyasmk/screens/login_screen/index_login_screen.dart';
+import 'package:karyasmk/screens/school_screen/SchoolScreen.dart';
 import 'package:karyasmk/screens/seller_screen/AuthSellerScreen.dart';
 import 'package:karyasmk/widgets/LoadingBuilder.dart';
 import 'package:neumorphic/neumorphic.dart';
@@ -65,6 +66,8 @@ class _LoginScreenState extends State<IndexProfileScreen> {
               return AuthSellerScreen();
             } else if (state.role == 'buyer') {
               return BuyerScreen();
+            } else if (state.role == 'school') {
+              return SchoolScreen();
             }
             return IndexLoginScreen();
           } else if (state is AuthFailureState) {

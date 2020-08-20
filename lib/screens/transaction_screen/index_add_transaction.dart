@@ -43,8 +43,6 @@ class IndexAddTransaction extends StatelessWidget {
       }
 
       return Container();
-
-      //TODO: yg kardus pizza yg awal apus aja karna idnya ga sama kaya yg di docnya
     });
   }
 }

@@ -28,3 +28,8 @@ class FetchTransactionEvent extends TransactionEvent {
   final String endpoint;
   FetchTransactionEvent(this.endpoint);
 }
+
+class SellerFetchTransactionEvent extends TransactionEvent {
+  final String endpoint;
+  SellerFetchTransactionEvent(this.endpoint);
+}

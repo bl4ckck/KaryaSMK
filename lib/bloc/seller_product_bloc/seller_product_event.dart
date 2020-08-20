@@ -16,3 +16,8 @@ class FetchSellerProductEvent extends SellerProductEvent {
   final String endpoint;
   FetchSellerProductEvent(this.endpoint);
 }
+
+class SellerFetchTransactionEvent extends SellerProductEvent {
+  final String endpoint;
+  SellerFetchTransactionEvent(this.endpoint);
+}

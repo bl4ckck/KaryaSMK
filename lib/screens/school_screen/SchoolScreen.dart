@@ -2,24 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/auth_bloc/auth_bloc.dart';
-import 'package:karyasmk/bloc/seller_product_bloc/seller_product_bloc.dart';
-import 'package:karyasmk/screens/seller_screen/MyProduct.dart';
-import 'package:karyasmk/screens/seller_screen/index_add_product.dart';
-import 'package:karyasmk/screens/seller_screen/index_sold_item.dart';
-import 'package:karyasmk/widgets/HexColor.dart';
+import 'package:karyasmk/bloc/school_bloc/school_bloc.dart';
+import 'package:karyasmk/screens/school_screen/SchoolProduct.dart';
 import 'package:karyasmk/widgets/ProfileInfo.dart';
 import 'package:neumorphic/neumorphic.dart';
 
-class AuthSellerScreen extends StatefulWidget {
-  const AuthSellerScreen({Key key}) : super(key: key);
+class SchoolScreen extends StatefulWidget {
+  const SchoolScreen({Key key}) : super(key: key);
 
   @override
-  _AuthSellerScreenState createState() => _AuthSellerScreenState();
+  _SchoolScreenState createState() => _SchoolScreenState();
 }
 
-class _AuthSellerScreenState extends State<AuthSellerScreen> {
+class _SchoolScreenState extends State<SchoolScreen> {
   AuthBloc _authBloc;
-  SellerProductBloc _productBloc;
+  SchoolBloc _schoolBloc;
   String email = '';
   String nama = '';
   String type = '';
@@ -43,8 +40,8 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
       phone = box.getAt(0).phone ?? '';
     });
 
-    _productBloc = BlocProvider.of<SellerProductBloc>(context);
-    _productBloc.add(FetchSellerProductEvent(uid));
+    _schoolBloc = BlocProvider.of<SchoolBloc>(context);
+    _schoolBloc.add(FetchSchoolProductEvent());
   }
 
   void signOut() async {
@@ -87,8 +84,8 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
   }
 
   void refresh() async {
-    _productBloc = BlocProvider.of<SellerProductBloc>(context);
-    _productBloc.add(FetchSellerProductEvent(uid));
+    _schoolBloc = BlocProvider.of<SchoolBloc>(context);
+    _schoolBloc.add(FetchSchoolProductEvent());
   }
 
   @override
@@ -114,28 +111,6 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
           margin: EdgeInsets.only(left: 16, right: 16),
           child: Column(
             children: <Widget>[
-              Container(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                        builder: (context) => new IndexSoldItem(
-                          endpoint: uid,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Chip(
-                    label: Text(
-                      'View Sold Items',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    backgroundColor: Colors.orangeAccent,
-                  ),
-                ),
-              ),
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[
@@ -151,31 +126,14 @@ class _AuthSellerScreenState extends State<AuthSellerScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      'My Products',
+                      'School Products',
                       style: TextStyle(fontSize: 20),
                     ),
-                    FloatingActionButton(
-                      heroTag: null,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                            builder: (context) => new IndexAddProduct(uid: uid),
-                          ),
-                        );
-                      },
-                      elevation: 2,
-                      tooltip: 'Add Item',
-                      foregroundColor: HexColor('#ef8d31'),
-                      child: Icon(
-                        Icons.add,
-                      ),
-                      backgroundColor: NeuTheme.of(context).backgroundColor,
-                    ),
+                    SizedBox()
                   ],
                 ),
               ),
-              MyProduct(
+              SchoolProduct(
                 itemHeight: itemHeight,
                 itemWidth: itemWidth,
               )
