@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+import 'package:karyasmk/constants/base_url.dart';
 import 'package:karyasmk/helper/hive/session_user.dart';
 import 'package:karyasmk/models/Auth.dart';
 
@@ -29,8 +30,8 @@ class AuthRepository {
     @required String password,
   }) async {
     Response response;
-    response = await dio.post('http://localhost:5000/api/v1/auth',
-        data: {"email": email, "password": password});
+    response = await dio
+        .post(BaseUrl + 'auth', data: {"email": email, "password": password});
 
     final jsonResponse = json.decode(response.toString());
 
@@ -56,8 +57,7 @@ class AuthRepository {
       @required String phone,
       @required String type}) async {
     Response response;
-    response =
-        await dio.post('http://localhost:5000/api/v1/auth/register', data: {
+    response = await dio.post(BaseUrl + 'auth/register', data: {
       "email": email,
       "password": password,
       "nama": nama,
@@ -80,23 +80,5 @@ class AuthRepository {
     } else if (data.user.code == 'error') return data.user.message;
 
     return 'general';
-  }
-
-  Future<void> deleteToken() async {
-    /// delete from keystore/keychain
-    await Future.delayed(Duration(seconds: 1));
-    return;
-  }
-
-  Future<void> persistToken(String token) async {
-    /// write to keystore/keychain
-    await Future.delayed(Duration(seconds: 1));
-    return;
-  }
-
-  Future<bool> hasToken() async {
-    /// read from keystore/keychain
-    await Future.delayed(Duration(seconds: 1));
-    return false;
   }
 }

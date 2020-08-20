@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:karyasmk/models/Transaction.dart';
 import 'package:karyasmk/repositories/transaction_repo.dart';
 
 part 'transaction_event.dart';
@@ -17,6 +18,17 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   ) async* {
     if (event is StartPageTransactionEvent) {
       yield TransactionRefresh();
+    }
+    if (event is FetchTransactionEvent) {
+      yield TransactionLoadingState();
+
+      try {
+        final List<TransactionModel> transaction =
+            await _transactionRepo.getTransactionByUser(event.endpoint);
+        yield TransactionLoadedState(transaction: transaction);
+      } catch (e) {
+        yield TransactionFailurState(msg: e);
+      }
     }
     if (event is PostTransaction) {
       yield TransactionAddLoadingState();

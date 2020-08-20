@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 class Transaction {
-  List<TransactionModel> categoryList;
+  List<TransactionModel> transactionList;
 
-  Transaction({this.categoryList});
+  Transaction({this.transactionList});
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
-        categoryList: List<TransactionModel>.from(json['transaction_list']
+        transactionList: List<TransactionModel>.from(json['transaction_list']
             .map((item) => TransactionModel.fromMap(item))));
   }
 }

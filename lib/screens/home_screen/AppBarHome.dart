@@ -19,7 +19,7 @@ class AppBarHome extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Hello, Awe!',
+                  'Hello, world!',
                   maxLines: 1,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),

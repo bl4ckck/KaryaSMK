@@ -23,3 +23,8 @@ class PostTransaction extends TransactionEvent {
     this.qtyResult,
   });
 }
+
+class FetchTransactionEvent extends TransactionEvent {
+  final String endpoint;
+  FetchTransactionEvent(this.endpoint);
+}

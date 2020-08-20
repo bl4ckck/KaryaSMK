@@ -21,3 +21,23 @@ class TransactionAddStatusState extends TransactionState {
   @override
   List<Object> get props => [msg];
 }
+
+class TransactionLoadingState extends TransactionState {}
+
+class TransactionLoadedState extends TransactionState {
+  final List<TransactionModel> transaction;
+
+  TransactionLoadedState({this.transaction});
+
+  @override
+  List<Object> get props => [transaction];
+}
+
+class TransactionFailurState extends TransactionState {
+  final msg;
+
+  TransactionFailurState({this.msg});
+
+  @override
+  List<Object> get props => [msg];
+}

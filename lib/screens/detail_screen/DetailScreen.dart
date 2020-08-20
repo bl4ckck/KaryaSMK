@@ -47,20 +47,20 @@ class _DetailScreenState extends State<DetailScreen> {
           Navigator.pop(ctx, true);
         },
       ),
-      actions: <Widget>[
-        IconButton(
-          iconSize: 27,
-          color: Colors.black,
-          icon: Icon(Icons.search),
-          onPressed: () {},
-        ),
-        IconButton(
-          iconSize: 27,
-          color: Colors.black,
-          icon: Icon(Icons.star_border),
-          onPressed: () {},
-        ),
-      ],
+      // actions: <Widget>[
+      //   IconButton(
+      //     iconSize: 27,
+      //     color: Colors.black,
+      //     icon: Icon(Icons.search),
+      //     onPressed: () {},
+      //   ),
+      //   IconButton(
+      //     iconSize: 27,
+      //     color: Colors.black,
+      //     icon: Icon(Icons.star_border),
+      //     onPressed: () {},
+      //   ),
+      // ],
     );
   }
 
@@ -163,7 +163,12 @@ class _DetailScreenState extends State<DetailScreen> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('title'),
+                  title: Center(
+                    child: Text(
+                      'Checkout',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   content: IndexAddTransaction(
                       idProduct: widget.data[0].idProduct,
                       title: widget.data[0].title,

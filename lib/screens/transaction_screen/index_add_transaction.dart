@@ -25,7 +25,12 @@ class IndexAddTransaction extends StatelessWidget {
       if (state is TransactionAddLoadingState) {
         return LoadingBuilder();
       } else if (state is TransactionAddStatusState) {
-        return Center(child: Text('Success Transaction'));
+        return Center(
+            child: Icon(
+          Icons.check_box,
+          color: Colors.green,
+          size: 80,
+        ));
       } else if (state is TransactionRefresh) {
         return AddTransactionScreen(
             idProduct: idProduct,

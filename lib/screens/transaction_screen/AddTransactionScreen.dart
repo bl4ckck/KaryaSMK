@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:karyasmk/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:karyasmk/bloc/transaction_bloc/transaction_bloc.dart';
+import 'package:karyasmk/helper/currencyFormat.dart';
 
 class AddTransactionScreen extends StatefulWidget {
   const AddTransactionScreen({
@@ -47,7 +47,6 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
     _productDetailBloc.add(FetchProductDetail(endpoint));
   }
 
-//TODO: UI nya rapihin
   Widget submitButton() {
     return Material(
       elevation: 0,
@@ -69,20 +68,41 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-          child: Column(
-        children: <Widget>[
-          Text(widget.idProduct),
-          Text(widget.title),
-          Text(widget.uid),
-          Text(widget.uidSeller),
-          Text('${widget.price}'),
-          Text('${widget.quantity}'),
-          Text('${widget.qtySelected}'),
-          submitButton()
-        ],
-      )),
+    num totalPrice = widget.price * widget.qtySelected;
+
+    return SingleChildScrollView(
+      child: Container(
+        child: Center(
+            child: Column(
+          children: <Widget>[
+            Text('Product Name:', style: style.copyWith(fontSize: 17)),
+            Text(
+              widget.title,
+              style: TextStyle(fontSize: 17),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Text('Total Item:', style: style.copyWith(fontSize: 17)),
+            Text(
+              '${widget.qtySelected}',
+              style: TextStyle(fontSize: 17),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Text('Total Price:', style: style.copyWith(fontSize: 17)),
+            Text(
+              currencyFormat(totalPrice),
+              style: TextStyle(fontSize: 17),
+            ),
+            SizedBox(
+              height: 22,
+            ),
+            submitButton()
+          ],
+        )),
+      ),
     );
   }
 }
