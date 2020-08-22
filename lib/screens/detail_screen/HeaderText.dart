@@ -17,13 +17,11 @@ class HeaderText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'SMK Negeri 1 Kota Bekasi',
+            'SMK Karya 1',
             maxLines: 2,
             style: TextStyle(
               wordSpacing: 3,
               fontSize: 14,
-              // fontFamily: 'Montserrat',
-              // fontWeight: FontWeight.bold,
             ),
           ),
           Divider(

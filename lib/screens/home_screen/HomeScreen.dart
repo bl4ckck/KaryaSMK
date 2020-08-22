@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void init() {
+  void init() async {
     _productListBloc = BlocProvider.of<ProductListBloc>(context);
     _productListBloc.add(InitialFetchProductEvent());
   }

@@ -62,20 +62,6 @@ class MyApp extends StatelessWidget {
           platform: TargetPlatform.android,
           primaryColor: Color.lerp(_color, Colors.black, 0.2),
           backgroundColor: Color.lerp(_color, Colors.black, 0.005),
-          // appBarTheme: AppBarTheme(
-          //   brightness: Brightness.dark,
-          //   // color: _color,
-          //   textTheme: TextTheme(
-          //     headline6: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: 20,
-          //       fontWeight: FontWeight.w500,
-          //     ),
-          //   ),
-          //   iconTheme: IconThemeData(
-          //     color: Colors.black,
-          //   ),
-          // ),
         ),
         home: HomeScreen(),
       ),

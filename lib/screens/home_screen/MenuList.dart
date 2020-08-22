@@ -24,6 +24,7 @@ class MenuList extends StatelessWidget {
       ),
       padding: EdgeInsets.all(19.0),
       shrinkWrap: true,
+      cacheExtent: 10000,
       physics: NeverScrollableScrollPhysics(),
       itemCount: menuItems.length,
       itemBuilder: (BuildContext context, int index) {

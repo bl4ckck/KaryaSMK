@@ -33,6 +33,7 @@ class TerbaruList extends StatelessWidget {
             controller: new ScrollController(keepScrollOffset: false),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
+            cacheExtent: 10000,
             physics: NeverScrollableScrollPhysics(),
             itemCount: mystate.length,
             itemBuilder: (BuildContext context, int i) {

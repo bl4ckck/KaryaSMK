@@ -26,6 +26,7 @@ class PurchaseHistory extends StatelessWidget {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: mystate.length,
+            cacheExtent: 10000,
             itemBuilder: (BuildContext context, int i) {
               var index = mystate[i];
 
